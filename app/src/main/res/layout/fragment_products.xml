@@ -1,0 +1,170 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".fragments.ProductsFragment">-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Search bar &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/searchBar"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:hint="Search products"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_margin="16dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:padding="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_alignParentTop="true" />&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        android:background="@drawable/search_bar_background"&ndash;&gt;&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    &lt;!&ndash; Category filter &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <Spinner&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/categoryFilter"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_below="@id/searchBar"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_margin="16dp" />&ndash;&gt;-->
+<!--    &lt;!&ndash; Search bar with rounded corners, padding, and a search icon &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/searchLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:padding="8dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:background="@drawable/rounded_background"-->
+<!--        android:elevation="4dp">-->
+
+<!--        &lt;!&ndash; Search icon &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:id="@+id/searchIcon"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_search"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            app:tint="@color/search_icon_color" />-->
+
+<!--        &lt;!&ndash; Search input field &ndash;&gt;-->
+<!--        <EditText-->
+<!--            android:id="@+id/searchBar"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:hint="Search products"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:textColor="@color/textColor"-->
+<!--            android:textSize="16sp"-->
+<!--            android:padding="8dp"-->
+<!--            android:inputType="text" />-->
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; Category filter with a drop-down arrow icon and rounded background &ndash;&gt;-->
+<!--    <Spinner-->
+<!--        android:id="@+id/categoryFilter"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/searchLayout"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:padding="8dp"-->
+<!--        android:background="@drawable/rounded_background"-->
+<!--        android:spinnerMode="dropdown"-->
+<!--        android:popupBackground="@color/popupBackground"-->
+<!--        android:paddingStart="16dp"-->
+<!--        android:paddingEnd="16dp"-->
+<!--        android:elevation="4dp"/>-->
+
+<!--    &lt;!&ndash; RecyclerView for displaying products &ndash;&gt;-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerViewProducts"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@id/categoryFilter"-->
+<!--        android:padding="16dp"-->
+<!--        android:scrollbars="vertical" />-->
+<!--</RelativeLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".fragments.ProductsFragment">
+
+    <!-- Search bar with rounded corners, padding, and a search icon -->
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_background"
+        android:elevation="4dp">
+
+        <!-- Search icon -->
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_search"
+            android:layout_marginEnd="8dp"
+            app:tint="@color/search_icon_color" />
+
+        <!-- Search input field -->
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search products"
+            android:background="@android:color/transparent"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <!-- Category filter with a drop-down arrow icon and rounded background -->
+    <RelativeLayout
+        android:id="@+id/categoryFilterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchLayout"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background"
+        android:padding="8dp"
+        android:elevation="4dp">
+
+        <Spinner
+            android:id="@+id/categoryFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:popupBackground="@color/popupBackground"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <!-- Dropdown arrow icon -->
+        <ImageView
+            android:id="@+id/dropdownIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_drop_down"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:tint="@color/textColor" />
+    </RelativeLayout>
+
+    <!-- RecyclerView for displaying products -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/categoryFilterLayout"
+        android:padding="16dp"
+        android:layout_marginBottom="48dp"
+        android:scrollbars="vertical" />
+</RelativeLayout>

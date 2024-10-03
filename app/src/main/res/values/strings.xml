@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">E-Commerce</string>
+    <string name="lbl_filter_search">Filter Search</string>
+    <string name="lbl_choose_card">Choose Card</string>
+    <string name="msg_welcome_to_e_com">Welcome to SnapBuy</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_sort_by">Sort By</string>
+    <string name="lbl_search_product">Search Product</string>
+    <string name="lbl_feed">Feed</string>
+    <string name="lbl_date_shipping">Date Shipping</string>
+    <string name="msg_price_shipping2">Price + Shipping: highest first</string>
+    <string name="lbl_buy_it_now">Buy It Now</string>
+    <string name="msg_authorized_seller">Authorized Seller</string>
+    <string name="lbl_packing">Packing</string>
+    <string name="lbl_gender">Gender</string>
+    <string name="lbl_last_name">Last Name</string>
+    <string name="lbl_import_charges">Import charges</string>
+    <string name="lbl_price_range">Price Range</string>
+    <string name="lbl_order_status">Order Status</string>
+    <string name="msg_have_an_account">Have an account? Sign In</string>
+    <string name="msg_enter_the_country">Enter the country or region</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_phone_number">Phone Number</string>
+    <string name="lbl_new_password">New Password</string>
+    <string name="lbl_all_listings">All Listings</string>
+    <string name="lbl_shipping">Shipping</string>
+    <string name="msg_don_t_have_an_account">Don\u2019t have an account? Register</string>
+    <string name="lbl_password_again">Password Again</string>
+    <string name="msg_sign_in_to_continue">Sign in to continue</string>
+    <string name="lbl_arriving">Arriving</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="success">Success</string>
+    <string name="not_found">Product Not Found</string>
+    <string name="thank_you_message">thank you for shopping</string>
+    <string name="back_to_order">Back To Order</string>
+    <string name="back_to_home">Back To Home</string>
+    <string name="success_icon_desc">Success Icon</string>
+    <string name="not_found_icon_desc">Not found Icon</string>
+    <string name="title_activity_success">SuccessActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkout_btn">Proceed to Checkout</string>
+    <string name="cart_title">My Cart</string>
+    <string name="category_icon_desc">Category Icon</string>
+    <string-array name="categories_array">
+        <item>All</item>
+        <item>Electronics</item>
+        <item>Clothing</item>
+        <item>Books</item>
+        <item>Home</item>
+    </string-array>
+</resources>

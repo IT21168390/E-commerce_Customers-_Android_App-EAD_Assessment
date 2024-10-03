@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    tools:context=".activities.NotFoundActivity">
+
+    <ImageView
+        android:id="@+id/not_found_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/not_found_icon_desc"
+        android:src="@drawable/ic_not_found" />
+
+    <TextView
+        android:id="@+id/not_found_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_found"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/thank_you_message_n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thank_you_message"
+        android:textSize="14sp"
+        android:textColor="@color/light_gray"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Back to Order Button -->
+    <Button
+        android:id="@+id/back_to_home_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_home"
+        android:textSize="16sp"
+        android:backgroundTint="@color/light_blue_600"
+        android:textColor="@android:color/white"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center" />
+</LinearLayout>

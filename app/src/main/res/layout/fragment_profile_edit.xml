@@ -7,52 +7,48 @@
     android:padding="16dp"
     tools:context=".fragments.ProfileEditFragment">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/topSection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:id="@+id/profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+             android:layout_below="@id/topSection"
+            >
 
-            <!-- Profile Title -->
-            <TextView
-                android:id="@+id/profile_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit Profile"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp" />
-
-            <!-- First Name Input Field -->
+            <!-- Name Input Field -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/first_name_input_layout"
+                android:id="@+id/name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
+                android:hint="Name"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/first_name_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Last Name Input Field -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/last_name_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/last_name_input"
+                    android:id="@+id/name_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName" />
@@ -60,18 +56,49 @@
 
             <!-- Address Input Field -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/address_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Address"
-                android:layout_marginBottom="16dp">
+                 android:id="@+id/street_input_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Street"
+                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/address_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/street_input"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:inputType="textPostalAddress" />
+             </com.google.android.material.textfield.TextInputLayout>
+
+             <com.google.android.material.textfield.TextInputLayout
+                 android:id="@+id/city_input_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="City"
+                 android:layout_marginBottom="16dp">
+
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/city_input"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:inputType="textPostalAddress" />
+             </com.google.android.material.textfield.TextInputLayout>
+
+
+             <com.google.android.material.textfield.TextInputLayout
+                 android:id="@+id/zip_input_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Zip Code"
+                 android:layout_marginBottom="16dp">
+
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/zip_input"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:inputType="textPostalAddress" />
+             </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <!-- Save Changes Button -->
             <Button
@@ -79,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save Changes"
-                android:backgroundTint="@color/purple_500"
+                android:backgroundTint="@color/light_blue_600"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="24dp" />
 
@@ -93,6 +120,6 @@
                 android:text="Deactivate Account"
                 android:textColor="@android:color/white" />
 
+
         </LinearLayout>
-    </ScrollView>
 </FrameLayout>

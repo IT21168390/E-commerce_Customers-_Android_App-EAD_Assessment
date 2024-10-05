@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import com.example.e_commercecustomers_ead.fragments.CartFragment;
 import com.example.e_commercecustomers_ead.fragments.OrderHistoryFragment;
 import com.example.e_commercecustomers_ead.fragments.ProductsFragment;
+import com.example.e_commercecustomers_ead.fragments.ProfileViewFragment;
+import com.example.e_commercecustomers_ead.fragments.VendorReviewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Fragment productsFragment;
     private Fragment cartFragment;
     private Fragment orderHistoryFragment;
+    private Fragment vendorReviewFragment;
+    private Fragment profileViewFragment;
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         productsFragment = new ProductsFragment();
         cartFragment = new CartFragment();
         orderHistoryFragment = new OrderHistoryFragment();
+        vendorReviewFragment = new VendorReviewFragment();
+        profileViewFragment = new ProfileViewFragment();
 
         // Initialize BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(productsFragment);
             bottomNavigationView.setSelectedItemId(R.id.exploreNav); // Highlight Explore as selected
+            bottomNavigationView.setSelectedItemId(R.id.profileNav);
         }
 
         // Set up navigation item selection listener
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = productsFragment;
                         break;
                     case R.id.profileNav:
-                        selectedFragment = productsFragment;
+                        selectedFragment = profileViewFragment;
                         break;
                     case R.id.cartNav:
                         selectedFragment = cartFragment;

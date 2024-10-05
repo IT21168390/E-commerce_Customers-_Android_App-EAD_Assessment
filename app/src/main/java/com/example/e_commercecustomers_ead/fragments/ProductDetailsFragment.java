@@ -15,10 +15,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.adapters.VendorReviewAdapter;
+import com.example.e_commercecustomers_ead.adapters.VendorReviewCustomerAdapter;
 import com.example.e_commercecustomers_ead.models.Product;
+import com.example.e_commercecustomers_ead.models.VendorCustomerReview;
+import com.example.e_commercecustomers_ead.models.VendorReview;
 import com.example.e_commercecustomers_ead.services.CartManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProductDetailsFragment extends Fragment {
 
@@ -28,6 +38,8 @@ public class ProductDetailsFragment extends Fragment {
     private Product product;
     // Variable for quantity input
     private NumberPicker quantityPicker;
+    private RecyclerView rvVendorReviews;
+    private VendorReviewCustomerAdapter vendorReviewCustomerAdapter;
 
     public ProductDetailsFragment() {
         // Required empty public constructor
@@ -63,6 +75,7 @@ public class ProductDetailsFragment extends Fragment {
         // Initialize other UI components...
         addToCartButton = view.findViewById(R.id.addToCartButton);
         quantityPicker = view.findViewById(R.id.quantityPicker);
+        rvVendorReviews = view.findViewById(R.id.rvVendorReviewsCustomer);
 
         // Initialize UI components
         productImage = view.findViewById(R.id.productImage);
@@ -75,6 +88,13 @@ public class ProductDetailsFragment extends Fragment {
         vendorName = view.findViewById(R.id.vendorName);
         addToCartButton = view.findViewById(R.id.addToCartButton);
         backButton = view.findViewById(R.id.backButton);
+
+        List<VendorCustomerReview> vendorReviews = fetchVendorReviews(); // This should fetch data based on the order
+
+        // Setup RecyclerView with adapter
+        rvVendorReviews.setLayoutManager(new LinearLayoutManager(getContext()));
+        vendorReviewCustomerAdapter = new VendorReviewCustomerAdapter(vendorReviews);
+        rvVendorReviews.setAdapter(vendorReviewCustomerAdapter);
 
         // Set product data to UI
         if (product != null) {
@@ -126,5 +146,12 @@ public class ProductDetailsFragment extends Fragment {
         transaction.replace(R.id.fragment_container, cartFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private List<VendorCustomerReview> fetchVendorReviews() {
+        List<VendorCustomerReview> reviews = new ArrayList<>();
+        reviews.add(new VendorCustomerReview("1", "Customer A"));
+        reviews.add(new VendorCustomerReview("2", "Customer B"));
+        return reviews;
     }
 }

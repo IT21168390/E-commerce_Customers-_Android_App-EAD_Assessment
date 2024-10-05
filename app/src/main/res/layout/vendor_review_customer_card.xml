@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/reviewLayout1"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/rounded_background"
+    android:layout_margin="8dp">
+
+    <!-- Customer Name -->
+    <TextView
+        android:id="@+id/tvCustomer_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customer Name"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- RatingBar for selecting rating -->
+    <RatingBar
+        android:id="@+id/rbVendor_Rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="0.0"
+        android:stepSize="0.5"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:gravity="start"
+    /> <!-- View-only -->
+
+    <!-- Review Comment -->
+
+    <TextView
+        android:id="@+id/tvVendorReview_Comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="8dp" />
+
+
+</LinearLayout>

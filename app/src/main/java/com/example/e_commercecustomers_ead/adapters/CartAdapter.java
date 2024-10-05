@@ -68,7 +68,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         // Set delete button click listener
         holder.deleteButton.setOnClickListener(v -> {
+            // Remove item from CartManager
             cartManager.removeFromCart(product);
+            // Remove item from adapter data source and notify adapter
+            cartItems.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, cartItems.size());
             updateTotalCost();  // Update the total cost

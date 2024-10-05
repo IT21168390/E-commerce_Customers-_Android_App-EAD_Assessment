@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- TabLayout for the four order statuses -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/orderStatusTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/design_default_color_primary"
+        app:tabSelectedTextColor="@color/design_default_color_primary"
+        app:tabTextColor="@color/black" />
+
+    <!-- ViewPager2 to host the fragments for each tab -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/orderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

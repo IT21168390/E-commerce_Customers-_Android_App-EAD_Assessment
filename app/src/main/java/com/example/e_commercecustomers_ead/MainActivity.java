@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.e_commercecustomers_ead.fragments.CartFragment;
+import com.example.e_commercecustomers_ead.fragments.OrderHistoryFragment;
 import com.example.e_commercecustomers_ead.fragments.ProductsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     // Initialize fragments
     private Fragment productsFragment;
     private Fragment cartFragment;
+    private Fragment orderHistoryFragment;
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize fragments
         productsFragment = new ProductsFragment();
         cartFragment = new CartFragment();
+        orderHistoryFragment = new OrderHistoryFragment();
 
         // Initialize BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()) {
                     case R.id.homeNav:
-                        selectedFragment = productsFragment;
+                        selectedFragment = orderHistoryFragment;
                         break;
                     case R.id.exploreNav:
                         selectedFragment = productsFragment;

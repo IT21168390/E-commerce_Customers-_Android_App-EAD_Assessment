@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/orderIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order ID: #123456"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/orderCostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cost: $1500.00"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/orderStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: Delivered"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/orderDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: 01 Jan 2024"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/orderDetailsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Details: ..."
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

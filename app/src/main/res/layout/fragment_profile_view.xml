@@ -8,17 +8,24 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/white"
-    tools:context=".fragments.ProfileViewFragment"
-    >
+    tools:context=".fragments.ProfileViewFragment">
 
     <!-- Profile Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="start"
         android:layout_marginBottom="32dp">
 
-        <!-- Name -->
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/avatar" />
+
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
@@ -26,25 +33,53 @@
             android:text="Name"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/black"/>
 
-        <!-- Username -->
         <TextView
-            android:id="@+id/tvUsername"
+            android:id="@+id/tvRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:textColor="@color/gray_400"
             android:layout_below="@id/tvName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="4dp" />
-
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="6dp"
+            android:text="Customer"
+            android:textColor="@color/gray_400"
+            android:textSize="14sp" />
     </RelativeLayout>
+
+    <!-- Edit Button -->
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/light_blue_600"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp" />
+
+
+    <Button
+        android:id="@+id/btnReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/light_blue_600"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notification"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/light_blue_600"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp" />
 
     <!-- Profile Details -->
     <LinearLayout
@@ -54,80 +89,6 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:showDividers="middle">
-
-        <!-- Gender -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="16dp">
-            <ImageView
-                android:id="@+id/iconGender"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_gender"
-                android:layout_alignParentStart="true" />
-            <TextView
-                android:id="@+id/tvGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:textSize="16sp"
-                android:layout_toEndOf="@id/iconGender"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black" />
-            <TextView
-                android:id="@+id/tvGenderValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Male"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_alignParentEnd="true" />
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_toEndOf="@id/tvGenderValue"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp" />
-        </RelativeLayout>
-
-        <!-- Birthday -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="16dp">
-            <ImageView
-                android:id="@+id/iconBirthday"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_date"
-                android:layout_alignParentStart="true" />
-            <TextView
-                android:id="@+id/tvBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Birthday"
-                android:textSize="16sp"
-                android:layout_toEndOf="@id/iconBirthday"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black" />
-            <TextView
-                android:id="@+id/tvBirthdayValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="12-12-2000"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_alignParentEnd="true" />
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_toEndOf="@id/tvBirthdayValue"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp" />
-        </RelativeLayout>
 
         <!-- Email -->
         <RelativeLayout
@@ -149,24 +110,14 @@
                 android:layout_toEndOf="@id/iconEmail"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
-
             <TextView
                 android:id="@+id/tvEmailValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="0dp"
                 android:text="abc@gmail.com"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_toEndOf="@id/tvEmailValue"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp" />
         </RelativeLayout>
 
         <!-- Phone Number -->
@@ -175,65 +126,70 @@
             android:layout_height="wrap_content"
             android:paddingVertical="16dp">
             <ImageView
-                android:id="@+id/iconPhoneNumber"
+                android:id="@+id/iconAccountStatus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_phone_icon"
                 android:layout_alignParentStart="true" />
             <TextView
-                android:id="@+id/tvPhoneNumber"
+                android:id="@+id/tvAccountStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone Number"
+                android:text="Account Status"
                 android:textSize="16sp"
-                android:layout_toEndOf="@id/iconPhoneNumber"
+                android:layout_toEndOf="@id/iconAccountStatus"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
-
             <TextView
-                android:id="@+id/tvPhoneNumberValue"
+                android:id="@+id/tvAccountStatusValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="(94)77 555-0133"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_toEndOf="@id/tvPhoneNumberValue"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp" />
         </RelativeLayout>
 
-        <!-- Change Password -->
+        <!-- Address -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="16dp">
             <ImageView
-                android:id="@+id/iconChangePassword"
+                android:id="@+id/iconAddress"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_password"
+                android:src="@drawable/ic_message"
                 android:layout_alignParentStart="true" />
             <TextView
-                android:id="@+id/tvChangePassword"
+                android:id="@+id/tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Password"
+                android:text="Address"
                 android:textSize="16sp"
-                android:layout_toEndOf="@id/iconChangePassword"
+                android:layout_toEndOf="@id/iconAddress"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:layout_alignParentEnd="true" />
+            <TextView
+                android:id="@+id/tvAddressValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="No. 123, Walivite,Malabe."
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </RelativeLayout>
 
+        <!-- Log Out Button -->
+        <Button
+            android:id="@+id/btnLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:backgroundTint="@color/light_blue_600"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
     </LinearLayout>
-
 </LinearLayout>

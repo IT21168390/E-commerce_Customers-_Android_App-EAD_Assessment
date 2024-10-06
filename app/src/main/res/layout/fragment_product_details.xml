@@ -143,6 +143,12 @@
 <!--                android:layout_marginStart="8dp" />-->
 <!--        </LinearLayout>-->
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVendorReviewsCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
 
         <Button
             android:id="@+id/addToCartButton"

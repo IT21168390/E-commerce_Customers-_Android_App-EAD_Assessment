@@ -52,9 +52,10 @@
                 android:id="@+id/orderStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Status: Pending"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp" />
+                android:textColor="#009688"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/orderDate"
@@ -84,6 +85,31 @@
                     android:layout_height="wrap_content"
                     android:text="Rate"
                     android:enabled="false" /> <!-- Enabled based on order status -->
+            </LinearLayout>
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <!-- Cancel and Update Buttons for Pending Orders -->
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#FF0000"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/updateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFC107"
+                    android:text="Update"
+                    android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

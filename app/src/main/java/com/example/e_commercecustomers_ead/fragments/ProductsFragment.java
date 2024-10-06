@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -199,6 +201,14 @@ public class ProductsFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
+
+        // Load the product data from API
+        //new FetchProductsTask().execute("http://192.168.56.1:7237/api/Product/GetAllProductList");  // Replace with your API URL
+        // Load products from API
+        //new LoadProductsTask().execute("https:192.168.56.1:44378/api/product/GetAllProductList"); // Replace with API URL https://localhost:44378/api/product/GetAllProductList
+
+
+
         return view;
     }
 
@@ -224,4 +234,138 @@ public class ProductsFragment extends Fragment {
         // Notify the adapter about data changes
         productAdapter.notifyDataSetChanged();
     }
+
+
+
+
+    private class LoadProductsTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder result = new StringBuilder();
+            try {
+                System.out.println("*******************"+urls[0]+"**************************");
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                reader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            System.out.println("*********************************************");
+            if (result == null) {
+                Toast.makeText(getContext(), "Failed to fetch products", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            System.out.println("*********************************************");
+            try {
+                JSONObject responseObj = new JSONObject(result);
+                //JSONArray resultsArray = responseObj.getJSONArray("results");
+                // Log the entire response for debugging
+                System.out.println(responseObj);
+                Log.d("PRODUCTS FRAGMENT", "API Response: " + responseObj.toString());
+                //JSONArray jsonArray = new JSONArray(result);
+                /*productList.clear();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String name = jsonObject.getString("name");
+                    String category = jsonObject.getString("category");
+                    String description = jsonObject.getString("description");
+                    String manufacturer = jsonObject.getString("manufacturer");
+                    double rating = jsonObject.getDouble("rating");
+                    double price = jsonObject.getDouble("price");
+                    int imageResource = R.drawable.ic_star_filled; // Replace with actual image resource if available
+                    int stock = jsonObject.getInt("stock");
+
+                    Product product = new Product(name, category, description, manufacturer, rating, price, imageResource, stock);
+                    productList.add(product);
+                }*/
+
+                // Copy all products to filtered list initially
+                //filteredProductList.clear();
+                //filteredProductList.addAll(productList);
+
+                // Notify the adapter about data changes
+                //productAdapter.notifyDataSetChanged();
+
+                // Log the response data
+                //Log.d("LoadProductsTask", "Response: " + result);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    // AsyncTask to fetch data from the API
+    /*private class FetchProductsTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String apiUrl = urls[0];
+            StringBuilder result = new StringBuilder();
+            try {
+                URL url = new URL(apiUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                reader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("-------------------------"+result);
+            return result.toString();
+        }*/
+
+        /*@Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            // Parse the JSON response and update the RecyclerView
+            try {
+                productList = new ArrayList<>(); // Initialize the list
+                JSONArray jsonArray = new JSONArray(result);
+
+                // Loop through each product in the JSON array
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    // Assuming your API returns these fields for each product
+                    String name = jsonObject.getString("name");
+                    String category = jsonObject.getString("category");
+                    String description = jsonObject.getString("description");
+                    String vendor = jsonObject.getString("vendor");
+                    double rating = jsonObject.getDouble("rating");
+                    double price = jsonObject.getDouble("price");
+                    int imageResource = R.drawable.ic_star_filled; // Placeholder image
+
+                    // Create a new Product object and add it to the list
+                    productList.add(new Product(name, category, description, vendor, rating, price, imageResource));
+                }
+
+                // Set the adapter with the fetched product data
+                productAdapter = new ProductAdapter(getContext(), productList);
+                recyclerView.setAdapter(productAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }*/
+
 }

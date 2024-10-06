@@ -20,15 +20,15 @@ public class ProductDataModel implements Serializable {
     private String UpdatedAt;
     private boolean isInCart;  // New field to track cart status
 
-    public ProductDataModel(String id, String productId, String name, String category, String vendorId, double price, String description, int imageResource, String status, String createdAt, String updatedAt) {
+    public ProductDataModel(String id, String productId, String name, String category, String vendorId, String vendorName, double price, String description, int stock, int imageResource, String status, String createdAt, String updatedAt) {
         Id = id;
         ProductId = productId;
         Name = name;
         Category = category;
         VendorId = vendorId;
-        vendorName = "VENDOR NAME";
+        this.vendorName = vendorName;
         rating = 4.0;
-        stock = 15;
+        this.stock = stock;
         Price = price;
         Description = description;
         this.imageResource = imageResource;

@@ -43,9 +43,12 @@
     <string name="category_icon_desc">Category Icon</string>
     <string-array name="categories_array">
         <item>All</item>
-        <item>Electronics</item>
+        <item>Electronic</item>
+        <item>Furniture</item>
+        <item>Stationery</item>
         <item>Clothing</item>
         <item>Books</item>
         <item>Home</item>
+        <item>Gardenery</item>
     </string-array>
 </resources>

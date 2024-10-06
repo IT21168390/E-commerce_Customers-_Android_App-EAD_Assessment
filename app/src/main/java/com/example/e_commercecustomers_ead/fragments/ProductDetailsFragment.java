@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.VendorReviewAdapter;
 import com.example.e_commercecustomers_ead.adapters.VendorReviewCustomerAdapter;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.models.Product;
 import com.example.e_commercecustomers_ead.models.VendorCustomerReview;
 import com.example.e_commercecustomers_ead.models.VendorReview;
@@ -35,7 +36,7 @@ public class ProductDetailsFragment extends Fragment {
     private ImageView productImage;
     private TextView productTitle, productCategory, productDescription, productPrice, productRating, vendorName, productStock;
     private Button addToCartButton, backButton;
-    private Product product;
+    private ProductDataModel product;
     // Variable for quantity input
     private NumberPicker quantityPicker;
     private RecyclerView rvVendorReviews;
@@ -45,7 +46,7 @@ public class ProductDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ProductDetailsFragment newInstance(Product product) {
+    public static ProductDetailsFragment newInstance(ProductDataModel product) {
         ProductDetailsFragment fragment = new ProductDetailsFragment();
         Bundle args = new Bundle();
         args.putSerializable("product", product);  // Assuming Product is serializable
@@ -59,7 +60,7 @@ public class ProductDetailsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            product = (Product) getArguments().getSerializable("product");
+            product = (ProductDataModel) getArguments().getSerializable("product");
         }
     }
 
@@ -107,7 +108,7 @@ public class ProductDetailsFragment extends Fragment {
             vendorName.setText(product.getVendorName());
             productStock.setText("Stock: " + product.getStock());
             quantityPicker.setMinValue(1);
-            quantityPicker.setMaxValue(product.getStock());
+            quantityPicker.setMaxValue(15);
 
             // Set initial button state
             if (cartManager.isInCart(product)) {

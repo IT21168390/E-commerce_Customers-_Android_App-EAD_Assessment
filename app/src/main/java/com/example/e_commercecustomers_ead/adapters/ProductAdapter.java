@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.fragments.ProductDetailsFragment;
 import com.example.e_commercecustomers_ead.models.Product;
 import java.util.List;
@@ -20,9 +21,9 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private Context context;
-    private List<Product> productList;
+    private List<ProductDataModel> productList;
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<ProductDataModel> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -36,10 +37,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
+        ProductDataModel product = productList.get(position);
         holder.productName.setText(product.getName());
         holder.productCategory.setText(product.getCategory());
-        holder.productRating.setRating((float) product.getRating());
+        holder.productRating.setRating((float) 4.0);
         holder.productPrice.setText("$" + product.getPrice());
         //holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
         //holder.productRating.setText(String.format("%.1f", product.getRating()));

@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(productsFragment);
             bottomNavigationView.setSelectedItemId(R.id.exploreNav); // Highlight Explore as selected
-            bottomNavigationView.setSelectedItemId(R.id.profileNav);
         }
 
         // Set up navigation item selection listener

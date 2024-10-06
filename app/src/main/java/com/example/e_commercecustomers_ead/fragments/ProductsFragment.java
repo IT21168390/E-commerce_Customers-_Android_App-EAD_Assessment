@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.ProductAdapter;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.models.Product;
 
 import org.json.JSONArray;
@@ -144,8 +145,8 @@ public class ProductsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
-    private List<Product> productList;
-    private List<Product> filteredProductList;
+    private List<ProductDataModel> productList;
+    private List<ProductDataModel> filteredProductList;
     private EditText searchBar;
     private Spinner categoryFilter;
 
@@ -163,7 +164,8 @@ public class ProductsFragment extends Fragment {
         categoryFilter = view.findViewById(R.id.categoryFilter);
 
         // Initialize product lists
-        loadProducts();
+        productList = new ArrayList<>();
+        //loadProducts();
         filteredProductList = new ArrayList<>(productList); // Initialize with all products
 
         // Set up category filter spinner
@@ -206,24 +208,25 @@ public class ProductsFragment extends Fragment {
         //new FetchProductsTask().execute("http://192.168.56.1:7237/api/Product/GetAllProductList");  // Replace with your API URL
         // Load products from API
         //new LoadProductsTask().execute("https:192.168.56.1:44378/api/product/GetAllProductList"); // Replace with API URL https://localhost:44378/api/product/GetAllProductList
+        new LoadProductsTask().execute("https://192.168.86.91:45457/api/product/GetAllProductList");
 
 
 
         return view;
     }
 
-    private void loadProducts() {
+    /*private void loadProducts() {
         productList = new ArrayList<>();
         productList.add(new Product("Product 1", "Electronics", "Best in the market", "John Marston", 4.5, 50.00, R.drawable.ic_star_filled, 1000));
         productList.add(new Product("Product 2", "Clothing", "Stylish and trendy", "Jane Smith", 4.0, 45.00, R.drawable.ic_star_filled, 1000));
         productList.add(new Product("Product 3", "Electronics", "Top quality", "Mike Johnson", 3.5, 30.00, R.drawable.ic_star_filled, 1000));
         // Add more products
-    }
+    }*/
 
     private void filterProducts(String searchQuery, String selectedCategory) {
         filteredProductList.clear();
 
-        for (Product product : productList) {
+        for (ProductDataModel product : productList) {
             // Apply search query and category filter
             if (product.getName().toLowerCase().contains(searchQuery.toLowerCase()) &&
                     (selectedCategory.equals("All") || product.getCategory().equals(selectedCategory))) {
@@ -270,41 +273,73 @@ public class ProductsFragment extends Fragment {
                 return;
             }
             System.out.println("*********************************************");
+//            try {
+//                //JSONObject responseObj = new JSONObject(result);
+//                //JSONArray resultsArray = responseObj.getJSONArray("results");
+//                // Log the entire response for debugging
+//                JSONArray resultsArray = new JSONArray(result);
+//                System.out.println(resultsArray);
+//                Log.d("PRODUCTS FRAGMENT", "API Response: " + resultsArray.toString());
+//                //JSONArray jsonArray = new JSONArray(result);
+//                /*productList.clear();
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                    String name = jsonObject.getString("name");
+//                    String category = jsonObject.getString("category");
+//                    String description = jsonObject.getString("description");
+//                    String manufacturer = jsonObject.getString("manufacturer");
+//                    double rating = jsonObject.getDouble("rating");
+//                    double price = jsonObject.getDouble("price");
+//                    int imageResource = R.drawable.ic_star_filled; // Replace with actual image resource if available
+//                    int stock = jsonObject.getInt("stock");
+//
+//                    Product product = new Product(name, category, description, manufacturer, rating, price, imageResource, stock);
+//                    productList.add(product);
+//                }*/
+//
+//                // Copy all products to filtered list initially
+//                //filteredProductList.clear();
+//                //filteredProductList.addAll(productList);
+//
+//                // Notify the adapter about data changes
+//                //productAdapter.notifyDataSetChanged();
+//
+//                // Log the response data
+//                //Log.d("LoadProductsTask", "Response: " + result);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
             try {
-                JSONObject responseObj = new JSONObject(result);
-                //JSONArray resultsArray = responseObj.getJSONArray("results");
-                // Log the entire response for debugging
-                System.out.println(responseObj);
-                Log.d("PRODUCTS FRAGMENT", "API Response: " + responseObj.toString());
-                //JSONArray jsonArray = new JSONArray(result);
-                /*productList.clear();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String name = jsonObject.getString("name");
-                    String category = jsonObject.getString("category");
-                    String description = jsonObject.getString("description");
-                    String manufacturer = jsonObject.getString("manufacturer");
-                    double rating = jsonObject.getDouble("rating");
-                    double price = jsonObject.getDouble("price");
-                    int imageResource = R.drawable.ic_star_filled; // Replace with actual image resource if available
-                    int stock = jsonObject.getInt("stock");
+                JSONArray resultsArray = new JSONArray(result);
+                productList.clear();
 
-                    Product product = new Product(name, category, description, manufacturer, rating, price, imageResource, stock);
+                for (int i = 0; i < resultsArray.length(); i++) {
+                    JSONObject productJson = resultsArray.getJSONObject(i);
+                    ProductDataModel product = new ProductDataModel(
+                            productJson.getString("id"),
+                            productJson.getString("productId"),
+                            productJson.getString("name"),
+                            productJson.getString("category"),
+                            productJson.getString("vendorId"),
+                            productJson.getDouble("price"),
+                            productJson.getString("description"),
+                            R.drawable.ic_star_filled, // Placeholder for vendor name, adjust as necessary
+                            productJson.getString("status"), // Placeholder rating, adjust as necessary
+                            productJson.getString("createdAt"),
+                            productJson.getString("createdAt")
+                    );
                     productList.add(product);
-                }*/
+                }
 
-                // Copy all products to filtered list initially
-                //filteredProductList.clear();
-                //filteredProductList.addAll(productList);
-
-                // Notify the adapter about data changes
-                //productAdapter.notifyDataSetChanged();
-
-                // Log the response data
-                //Log.d("LoadProductsTask", "Response: " + result);
+                // Refresh filtered product list and update the adapter
+                filteredProductList.clear();
+                filteredProductList.addAll(productList);
+                productAdapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Error parsing products", Toast.LENGTH_SHORT).show();
             }
         }
     }

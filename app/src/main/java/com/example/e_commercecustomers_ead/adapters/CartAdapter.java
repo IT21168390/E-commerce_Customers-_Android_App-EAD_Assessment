@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.models.Product;
 import com.example.e_commercecustomers_ead.services.CartManager;
 
@@ -33,11 +34,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //        this.cartItems = cartItems;
 //        this.onItemRemovedListener = listener;
 //    }
-    private List<Product> cartItems;
+    private List<ProductDataModel> cartItems;
     private Context context;
     private CartManager cartManager;
 
-    public CartAdapter(Context context, List<Product> cartItems) {
+    public CartAdapter(Context context, List<ProductDataModel> cartItems) {
         this.context = context;
         this.cartItems = cartItems;
         this.cartManager = CartManager.getInstance();
@@ -55,7 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         // Get the product at the current position
-        Product product = cartItems.get(position);
+        ProductDataModel product = cartItems.get(position);
 
         // Bind the product data to the UI elements in the cart item layout
         holder.productName.setText(product.getName());

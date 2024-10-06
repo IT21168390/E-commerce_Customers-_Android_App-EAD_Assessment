@@ -44,6 +44,37 @@ public class OrderHistoryFragment extends Fragment {
 
         return view;
     }
+    /*@Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Initialize the adapter here to ensure it's only created once
+        pagerAdapter = new OrderHistoryPagerAdapter(this);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_order_history, container, false);
+
+        tabLayout = view.findViewById(R.id.orderStatusTabLayout);
+        viewPager = view.findViewById(R.id.orderViewPager);
+
+        viewPager.setAdapter(pagerAdapter);
+
+        // Attach TabLayout with ViewPager2
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(tabTitles[position])
+        ).attach();
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewPager.setAdapter(null);
+    }*/
 }
 //import android.os.Bundle;
 //

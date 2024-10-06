@@ -1,5 +1,6 @@
 package com.example.e_commercecustomers_ead.services;
 
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.models.Product;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class CartManager {
 //    private CartManager() {
 //        cartItems = new ArrayList<>();
 //    }
-    private Map<Product, Integer> cartItems;
+    private Map<ProductDataModel, Integer> cartItems;
 
     private CartManager() {
         cartItems = new HashMap<>();
@@ -27,7 +28,7 @@ public class CartManager {
         return instance;
     }
 
-    public void addToCart(Product product, int quantity) {
+    public void addToCart(ProductDataModel product, int quantity) {
         /*cartItems.add(product);
         product.setInCart(true);*/
         if (cartItems.containsKey(product)) {
@@ -40,7 +41,7 @@ public class CartManager {
         }
     }
 
-    public void removeFromCart(Product product) {
+    public void removeFromCart(ProductDataModel product) {
         if (cartItems.containsKey(product)) {
             cartItems.remove(product);
             product.setInCart(false);
@@ -54,15 +55,15 @@ public class CartManager {
     public List<Product> getCartItems() {
         return cartItems;
     }*/
-    public boolean isInCart(Product product) {
+    public boolean isInCart(ProductDataModel product) {
         return cartItems.containsKey(product);
     }
 
-    public int getQuantity(Product product) {
+    public int getQuantity(ProductDataModel product) {
         return cartItems.getOrDefault(product, 0);
     }
 
-    public List<Product> getCartItems() {
+    public List<ProductDataModel> getCartItems() {
         return new ArrayList<>(cartItems.keySet());
     }
 
@@ -71,7 +72,7 @@ public class CartManager {
     }
 
     public void clearCart() {
-        for (Product product : cartItems.keySet()) {
+        for (ProductDataModel product : cartItems.keySet()) {
             product.setInCart(false);
         }
         cartItems.clear();
@@ -79,8 +80,8 @@ public class CartManager {
 
     public double getTotalCost() {
         double totalCost = 0.0;
-        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-            Product product = entry.getKey();
+        for (Map.Entry<ProductDataModel, Integer> entry : cartItems.entrySet()) {
+            ProductDataModel product = entry.getKey();
             int quantity = entry.getValue();
             totalCost += product.getPrice() * quantity;
         }

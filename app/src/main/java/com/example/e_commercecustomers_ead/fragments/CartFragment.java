@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.CartAdapter;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.models.Product;
 import com.example.e_commercecustomers_ead.services.CartManager;
 
@@ -26,7 +27,7 @@ public class CartFragment extends Fragment {
 
     private RecyclerView cartRecyclerView;
     private CartAdapter cartAdapter;
-    private List<Product> cartItems;
+    private List<ProductDataModel> cartItems;
     private Button checkoutButton;
     private TextView totalCost;
     private CartManager cartManager;
@@ -78,7 +79,7 @@ public class CartFragment extends Fragment {
 
             StringBuilder summary = new StringBuilder();
             double totalCost = cartManager.getTotalCost();
-            for (Product product : cartManager.getCartItems()) {
+            for (ProductDataModel product : cartManager.getCartItems()) {
                 summary.append(product.getName())
                         .append(" - Quantity: ")
                         .append(cartManager.getQuantity(product))
@@ -110,7 +111,7 @@ public class CartFragment extends Fragment {
     }*/
     private void updateTotalCost() {
         double total = 0;
-        for (Product product : cartItems) {
+        for (ProductDataModel product : cartItems) {
             int quantity = cartManager.getQuantity(product);
             total += product.getPrice() * quantity;
         }

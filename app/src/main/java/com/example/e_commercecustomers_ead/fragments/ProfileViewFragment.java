@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.example.e_commercecustomers_ead.R;
 
@@ -19,7 +22,7 @@ public class ProfileViewFragment extends Fragment {
 
     private TextView tvName, tvUsername, tvGenderValue, tvBirthdayValue, tvEmailValue, tvAccountStatusValue;
     private ImageView profileIcon;
-    private Button btnEdit, btnReview,  btnLogOut;
+    private Button btnEdit, btnReview, btnNotification,  btnLogOut;
 
     @Nullable
     @Override
@@ -35,6 +38,7 @@ public class ProfileViewFragment extends Fragment {
         btnEdit = view.findViewById(R.id.btnEdit);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         btnReview = view.findViewById(R.id.btnReview);
+        btnNotification = view.findViewById(R.id.btnNotification);
 
         // Set up button click listeners
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -57,18 +61,40 @@ public class ProfileViewFragment extends Fragment {
             }
         });
 
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new NotificationFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Implement log out logic here
-                logOut();
+                showConfirmationDialog();
             }
         });
 
         return view;
     }
 
-    private void logOut() {
-        // Add your logic to log out the user
+    private void showConfirmationDialog() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout from your account?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Call method to handle account deactivation
+                    logOut();
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
     }
+
+    private void logOut() {
+        Toast.makeText(requireContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
+    }
+
 }

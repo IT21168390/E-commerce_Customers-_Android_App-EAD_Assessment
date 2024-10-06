@@ -92,6 +92,14 @@ public class CartFragment extends Fragment {
                 // Handle purchase confirmation
                 Toast.makeText(getContext(), "Purchase Confirmed!", Toast.LENGTH_SHORT).show();
                 cartManager.clearCart();  // Clear the cart after purchase
+
+                // Clear the adapter's data and notify it
+                cartItems.clear();
+                cartAdapter.notifyDataSetChanged();
+
+                // Update total cost display
+                updateTotalCost();  // This will now show $0.00
+
                 // Optionally, navigate to another screen
             });
             builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());

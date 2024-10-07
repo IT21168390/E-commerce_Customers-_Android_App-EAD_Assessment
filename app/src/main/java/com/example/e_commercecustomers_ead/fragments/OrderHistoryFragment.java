@@ -50,7 +50,8 @@ public class OrderHistoryFragment extends Fragment {
         pagerAdapter = new OrderHistoryPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
-
+        // Re-navigating Crash - Bug Fix (for ViewPager2)
+        viewPager.setSaveEnabled(false);
 
         // Attach TabLayout with ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,

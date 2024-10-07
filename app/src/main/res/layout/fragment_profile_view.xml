@@ -35,7 +35,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvRole"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="abc@gmail.com"
+                android:text="Email"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -129,7 +129,7 @@
                 android:id="@+id/iconAccountStatus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_phone_icon"
+                android:src="@drawable/ic_status"
                 android:layout_alignParentStart="true" />
             <TextView
                 android:id="@+id/tvAccountStatus"
@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="(94)77 555-0133"
+                android:text="Status"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -159,7 +159,7 @@
                 android:id="@+id/iconAddress"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_message"
+                android:src="@drawable/ic_location"
                 android:layout_alignParentStart="true" />
             <TextView
                 android:id="@+id/tvAddress"

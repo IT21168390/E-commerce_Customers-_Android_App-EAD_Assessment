@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api_models.OrderModel;
 import com.example.e_commercecustomers_ead.models.Order;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import java.util.Locale;
 public class OrderDetailsFragment extends Fragment {
 
     private static final String ARG_ORDER = "order";
-    private Order order;
+    private OrderModel order;
 
     private TextView orderIdTextView, orderCostTextView, orderStatusTextView,
             orderDateTextView, orderDetailsTextView;
@@ -29,7 +30,7 @@ public class OrderDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static OrderDetailsFragment newInstance(Order order) {
+    public static OrderDetailsFragment newInstance(OrderModel order) {
         OrderDetailsFragment fragment = new OrderDetailsFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ORDER, order);
@@ -41,7 +42,7 @@ public class OrderDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            order = (Order) getArguments().getSerializable(ARG_ORDER);
+            order = (OrderModel) getArguments().getSerializable(ARG_ORDER);
         }
     }
 
@@ -59,15 +60,15 @@ public class OrderDetailsFragment extends Fragment {
 
         // Populate data
         if (order != null) {
-            orderIdTextView.setText("Order ID: " + order.getOrderId());
-            orderCostTextView.setText(String.format("Cost: $%.2f", order.getOrderCost()));
+            orderIdTextView.setText("Order ID: " + order.getOrderID());
+            orderCostTextView.setText(String.format("Cost: $%.2f", order.getTotalAmount()));
             orderStatusTextView.setText("Status: " + order.getOrderStatus());
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-            String formattedDate = sdf.format(order.getOrderDate());
-            orderDateTextView.setText("Date: " + formattedDate);
+            /*SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String formattedDate = sdf.format(order.getPlacedAt());*/
+            orderDateTextView.setText("Date: " + order.getPlacedAt().substring(0, 10));
 
-            orderDetailsTextView.setText(order.getOrderDetails());
+            orderDetailsTextView.setText("---");
         }
 
         return view;

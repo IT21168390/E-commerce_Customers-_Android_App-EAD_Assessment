@@ -1,5 +1,6 @@
 package com.example.e_commercecustomers_ead.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,14 +9,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.OrderHistoryPagerAdapter;
+import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class OrderHistoryFragment extends Fragment {
 
@@ -37,13 +50,18 @@ public class OrderHistoryFragment extends Fragment {
         pagerAdapter = new OrderHistoryPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
+
+
         // Attach TabLayout with ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
 
+
         return view;
     }
+
+
     /*@Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

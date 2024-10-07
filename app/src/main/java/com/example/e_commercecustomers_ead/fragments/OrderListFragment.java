@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.OrderAdapter;
+import com.example.e_commercecustomers_ead.api_models.OrderModel;
 import com.example.e_commercecustomers_ead.models.Order;
 import com.example.e_commercecustomers_ead.services.OrderManager;
 
@@ -30,7 +31,7 @@ public class OrderListFragment extends Fragment {
 
     private RecyclerView orderRecyclerView;
     private OrderAdapter orderAdapter;
-    private List<Order> orders;
+    private List<OrderModel> orders;
 
     public OrderListFragment() {
         // Required empty public constructor
@@ -82,7 +83,7 @@ public class OrderListFragment extends Fragment {
         });*/
         orderAdapter = new OrderAdapter(getContext(), orders, new OrderAdapter.OnOrderActionListener() {
             @Override
-            public void onViewDetails(Order order) {
+            public void onViewDetails(OrderModel order) {
                 // Handle View Details button click
                 // Navigate to OrderDetailsFragment
                 FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -93,9 +94,9 @@ public class OrderListFragment extends Fragment {
             }
 
             @Override
-            public void onRateOrder(Order order) {
+            public void onRateOrder(OrderModel order) {
                 // Handle Rate button click
-                if (order.getOrderStatus().equalsIgnoreCase("Delivered") && !order.isRated()) {
+                if (order.getOrderStatus().equalsIgnoreCase("Delivered") /*&& !order.isRated()*/) {
                     // Open Rating Dialog
                     showRatingDialog(order);
                 } else {
@@ -110,7 +111,7 @@ public class OrderListFragment extends Fragment {
         return view;
     }
 
-    private void showRatingDialog(Order order) {
+    private void showRatingDialog(OrderModel order) {
         // Implement a simple rating dialog
         // You can use a custom dialog layout with RatingBar and a confirm button
         // For simplicity, let's use AlertDialog with a simple message

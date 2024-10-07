@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 // Import the Order model
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api_models.OrderModel;
 import com.example.e_commercecustomers_ead.models.Order;
 import com.example.e_commercecustomers_ead.services.OrderManager;
 
@@ -27,15 +28,15 @@ import java.util.Locale;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
     public interface OnOrderActionListener {
-        void onViewDetails(Order order);
-        void onRateOrder(Order order);
+        void onViewDetails(OrderModel order);
+        void onRateOrder(OrderModel order);
     }
 
     private Context context;
-    private List<Order> orders;
+    private List<OrderModel> orders;
     private OnOrderActionListener actionListener;
 
-    public OrderAdapter(Context context, List<Order> orders,
+    public OrderAdapter(Context context, List<OrderModel> orders,
                         OnOrderActionListener actionListener) {
         this.context = context;
         this.orders = orders;
@@ -51,16 +52,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Order order = orders.get(position);
+        OrderModel order = orders.get(position);
 
         // Set order details
-        holder.orderId.setText("Order ID: " + order.getOrderId());
-        holder.orderCost.setText(String.format("Cost: $%.2f", order.getOrderCost()));
+        holder.orderId.setText("Order ID: " + order.getOrderID());
+        holder.orderCost.setText(String.format("Cost: $%.2f", order.getTotalAmount()));
         holder.orderStatus.setText("Status: " + order.getOrderStatus());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(order.getOrderDate());
-        holder.orderDate.setText("Date: " + formattedDate);
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(order.getPlacedAt());*/
+        holder.orderDate.setText("Date: " + order.getPlacedAt());
 
         // Set order icon/image if needed
         holder.orderIcon.setImageResource(R.drawable.baseline_sell_24); // Replace with actual image
@@ -85,7 +86,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
 
         // Enable or disable Rate button based on order status and rating
-        if (order.getOrderStatus().equalsIgnoreCase("Delivered") && !order.isRated()) {
+        if (order.getOrderStatus().equalsIgnoreCase("Delivered") /*&& !order.isRated()*/) {
             holder.rateButton.setEnabled(true);
         } else {
             holder.rateButton.setEnabled(false);
@@ -111,7 +112,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
 
-    private void showConfirmationDialog(Order order) {
+    private void showConfirmationDialog(OrderModel order) {
         new AlertDialog.Builder(context)
                 .setTitle("Cancel Order")
                 .setMessage("Are you sure you want to cancel this order?")
@@ -125,7 +126,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 .show();
     }
 
-    private void showUpdateAddressDialog(Order order) {
+    private void showUpdateAddressDialog(OrderModel order) {
         // Create a dialog to input the updated address
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -174,7 +175,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     // Method to update orders list
-    public void updateOrders(List<Order> newOrders) {
+    public void updateOrders(List<OrderModel> newOrders) {
         this.orders = newOrders;
         notifyDataSetChanged();
     }

@@ -208,7 +208,7 @@ public class ProductsFragment extends Fragment {
         //new FetchProductsTask().execute("http://192.168.56.1:7237/api/Product/GetAllProductList");  // Replace with your API URL
         // Load products from API
         //new LoadProductsTask().execute("https:192.168.56.1:44378/api/product/GetAllProductList"); // Replace with API URL https://localhost:44378/api/product/GetAllProductList
-        new LoadProductsTask().execute("https://192.168.86.91:45457/api/product/GetAllProductList");
+        new LoadProductsTask().execute("");//.execute("https://192.168.86.91:45456/api/product/GetAllProductList");
 
 
 
@@ -248,7 +248,7 @@ public class ProductsFragment extends Fragment {
             StringBuilder result = new StringBuilder();
             try {
                 System.out.println("*******************"+urls[0]+"**************************");
-                URL url = new URL(urls[0]);
+                URL url = new URL("https://192.168.86.91:45456/api/product/GetAllProductList");//URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 

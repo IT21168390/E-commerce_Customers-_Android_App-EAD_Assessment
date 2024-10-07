@@ -115,15 +115,13 @@ public class ProfileEditFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("*********************************************");
             if (result == null) {
                 Toast.makeText(getContext(), "Failed to fetch Users", Toast.LENGTH_SHORT).show();
                 return;
             }else{
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             }
-            System.out.println("*********************************************");
-//
+            
             try{
                 JSONObject jsonObject = new JSONObject(result);
                 user = jsonObject;

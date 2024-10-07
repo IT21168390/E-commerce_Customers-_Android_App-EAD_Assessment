@@ -23,13 +23,13 @@ public class OrderModel implements Serializable {
 
     public Address ShippingAddress;
 
-    public Date PlacedAt;
+    public String PlacedAt;
 
-    public Date UpdatedAt;
+    public String UpdatedAt;
 
     public List<VendorOrderStatus> VendorStatus;
 
-    public OrderModel(String id, String orderID, String customerId, String customerName, String orderStatus, List<OrderItem> orderItems, double totalAmount, String note, Address shippingAddress, Date placedAt, Date updatedAt, List<VendorOrderStatus> vendorStatus) {
+    public OrderModel(String id, String orderID, String customerId, String customerName, String orderStatus, List<OrderItem> orderItems, double totalAmount, String note, Address shippingAddress, String placedAt, String updatedAt, List<VendorOrderStatus> vendorStatus) {
         Id = id;
         OrderID = orderID;
         CustomerId = customerId;
@@ -116,19 +116,19 @@ public class OrderModel implements Serializable {
         ShippingAddress = shippingAddress;
     }
 
-    public Date getPlacedAt() {
+    public String getPlacedAt() {
         return PlacedAt;
     }
 
-    public void setPlacedAt(Date placedAt) {
+    public void setPlacedAt(String placedAt) {
         PlacedAt = placedAt;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return UpdatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         UpdatedAt = updatedAt;
     }
 
@@ -141,119 +141,3 @@ public class OrderModel implements Serializable {
     }
 }
 
-class OrderItem
-{
-    public String ProductId;
-
-    public String ProductName;
-
-    public int Quantity;
-
-    public double Price;
-
-    public String getProductId() {
-        return ProductId;
-    }
-
-    public void setProductId(String productId) {
-        ProductId = productId;
-    }
-
-    public String getProductName() {
-        return ProductName;
-    }
-
-    public void setProductName(String productName) {
-        ProductName = productName;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        Quantity = quantity;
-    }
-
-    public double getPrice() {
-        return Price;
-    }
-
-    public void setPrice(double price) {
-        Price = price;
-    }
-}
-
-class VendorOrderStatus
-{
-    public String VendorId;
-
-    public String VendorName;
-
-    public String Status;
-
-    public boolean Rated;
-
-    public String getVendorId() {
-        return VendorId;
-    }
-
-    public void setVendorId(String vendorId) {
-        VendorId = vendorId;
-    }
-
-    public String getVendorName() {
-        return VendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        VendorName = vendorName;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
-    }
-
-    public boolean isRated() {
-        return Rated;
-    }
-
-    public void setRated(boolean rated) {
-        Rated = rated;
-    }
-}
-
-class Address
-{
-    public String Street;
-    public String City;
-    public String ZipCode;
-
-    public String getStreet() {
-        return Street;
-    }
-
-    public void setStreet(String street) {
-        Street = street;
-    }
-
-    public String getCity() {
-        return City;
-    }
-
-    public void setCity(String city) {
-        City = city;
-    }
-
-    public String getZipCode() {
-        return ZipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        ZipCode = zipCode;
-    }
-}

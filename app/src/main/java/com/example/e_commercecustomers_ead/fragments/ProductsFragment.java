@@ -322,8 +322,10 @@ public class ProductsFragment extends Fragment {
                             productJson.getString("name"),
                             productJson.getString("category"),
                             productJson.getString("vendorId"),
+                            productJson.getString("vendorName"),
                             productJson.getDouble("price"),
                             productJson.getString("description"),
+                            productJson.getInt("stockQuantity"),
                             R.drawable.ic_star_filled, // Placeholder for vendor name, adjust as necessary
                             productJson.getString("status"), // Placeholder rating, adjust as necessary
                             productJson.getString("createdAt"),

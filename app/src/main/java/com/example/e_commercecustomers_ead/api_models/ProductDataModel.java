@@ -1,7 +1,6 @@
 package com.example.e_commercecustomers_ead.api_models;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class ProductDataModel implements Serializable {
     private String Id;

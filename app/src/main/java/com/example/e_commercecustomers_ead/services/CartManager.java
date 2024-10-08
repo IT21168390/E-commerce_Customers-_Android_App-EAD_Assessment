@@ -1,7 +1,6 @@
 package com.example.e_commercecustomers_ead.services;
 
 import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
-import com.example.e_commercecustomers_ead.models.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +9,6 @@ import java.util.Map;
 
 public class CartManager {
     private static CartManager instance;
-//    private List<Product> cartItems;
-//
-//    private CartManager() {
-//        cartItems = new ArrayList<>();
-//    }
     private Map<ProductDataModel, Integer> cartItems;
 
     private CartManager() {
@@ -29,8 +23,6 @@ public class CartManager {
     }
 
     public void addToCart(ProductDataModel product, int quantity) {
-        /*cartItems.add(product);
-        product.setInCart(true);*/
         if (cartItems.containsKey(product)) {
             // If the product is already in the cart, increase the quantity
             cartItems.put(product, cartItems.get(product) + quantity);
@@ -48,13 +40,6 @@ public class CartManager {
         }
     }
 
-    /*public boolean isInCart(Product product) {
-        return cartItems.contains(product);
-    }
-
-    public List<Product> getCartItems() {
-        return cartItems;
-    }*/
     public boolean isInCart(ProductDataModel product) {
         return cartItems.containsKey(product);
     }

@@ -118,8 +118,6 @@ public class VendorReviewAdapter extends RecyclerView.Adapter<VendorReviewAdapte
                     vendorReview.setStarRating(rbVendorRating.getRating());
                     vendorReview.setEditMode(false);
                     notifyItemChanged(position);
-                    // Save the updated comment to the database here if needed
-//                    saveReviewToDatabase(vendorReview.getVendorId(), vendorReview.getReviewComment());
                 } else {
                     // Edit mode: Allow editing the comment
                     vendorReview.setEditMode(true);

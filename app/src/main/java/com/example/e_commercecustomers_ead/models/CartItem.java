@@ -1,7 +1,4 @@
 package com.example.e_commercecustomers_ead.models;
-
-import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
-
 public class CartItem {
     private String productId;
     private int quantity;

@@ -47,8 +47,6 @@ public class CategoryFragment extends Fragment {
         categoryList.add(new Category("Woman Bag", R.drawable.woman_bag_icon));
         categoryList.add(new Category("High Heels", R.drawable.woman_shoes_icon));
 
-        // Add more categories as needed
-
         // Set adapter
         categoryAdapter = new CategoryAdapter(categoryList, getContext());
         categoryRecyclerView.setAdapter(categoryAdapter);

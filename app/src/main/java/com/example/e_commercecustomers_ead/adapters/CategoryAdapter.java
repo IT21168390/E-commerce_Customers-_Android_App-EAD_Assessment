@@ -1,7 +1,6 @@
 package com.example.e_commercecustomers_ead.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.models.Category;
-import com.example.e_commercecustomers_ead.models.Product;
 
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categoryList.get(position);
         holder.categoryName.setText(category.getName());
-        holder.categoryIcon.setImageResource(category.getIconResId()); // assuming you have a method to get the icon resource ID
+        holder.categoryIcon.setImageResource(category.getIconResId());
     }
 
     @Override

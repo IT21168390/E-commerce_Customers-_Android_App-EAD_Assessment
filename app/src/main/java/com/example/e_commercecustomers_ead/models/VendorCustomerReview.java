@@ -1,7 +1,5 @@
 package com.example.e_commercecustomers_ead.models;
 
-import java.util.List;
-
 public class VendorCustomerReview {
 
     private String vendorId;

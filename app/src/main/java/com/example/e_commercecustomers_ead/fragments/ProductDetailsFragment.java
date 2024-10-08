@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -19,16 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
-import com.example.e_commercecustomers_ead.adapters.VendorReviewAdapter;
 import com.example.e_commercecustomers_ead.adapters.VendorReviewCustomerAdapter;
 import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
-import com.example.e_commercecustomers_ead.models.Product;
 import com.example.e_commercecustomers_ead.models.VendorCustomerReview;
-import com.example.e_commercecustomers_ead.models.VendorReview;
 import com.example.e_commercecustomers_ead.services.CartManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ProductDetailsFragment extends Fragment {
@@ -49,7 +44,7 @@ public class ProductDetailsFragment extends Fragment {
     public static ProductDetailsFragment newInstance(ProductDataModel product) {
         ProductDetailsFragment fragment = new ProductDetailsFragment();
         Bundle args = new Bundle();
-        args.putSerializable("product", product);  // Assuming Product is serializable
+        args.putSerializable("product", product);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,7 +94,7 @@ public class ProductDetailsFragment extends Fragment {
 
         // Set product data to UI
         if (product != null) {
-            productImage.setImageResource(product.getImageResource()); // Assuming image is a drawable resource
+            productImage.setImageResource(product.getImageResource());
             productTitle.setText(product.getName());
             productCategory.setText(product.getCategory());
             productDescription.setText(product.getDescription());
@@ -141,7 +136,7 @@ public class ProductDetailsFragment extends Fragment {
     }
 
     private void navigateToCart() {
-        // You can implement this to navigate to your cart fragment or activity
+        // implement this to navigate to your cart fragment or activity
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         CartFragment cartFragment = new CartFragment();
         transaction.replace(R.id.fragment_container, cartFragment);

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
-import com.example.e_commercecustomers_ead.api_models.OrderItem;
 import com.example.e_commercecustomers_ead.api_models.VendorOrderStatus;
 
 import java.util.List;

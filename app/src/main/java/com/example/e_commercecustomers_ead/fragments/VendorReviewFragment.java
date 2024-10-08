@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,19 +17,12 @@ import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.VendorReviewAdapter;
 import com.example.e_commercecustomers_ead.models.VendorReview;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class VendorReviewFragment extends Fragment {
@@ -48,13 +40,10 @@ public class VendorReviewFragment extends Fragment {
         rvVendorReviews = root.findViewById(R.id.rvVendorReviews);
         backButton = root.findViewById(R.id.backButton);
 
-        // Assume VendorReview class has fields like vendorId, vendorName, productList, etc.
         myList = fetchVendorReviews(); // This should fetch data based on the order
 
         // Setup RecyclerView with adapter
         rvVendorReviews.setLayoutManager(new LinearLayoutManager(getContext()));
-//        vendorReviewAdapter = new VendorReviewAdapter(myList);
-//        rvVendorReviews.setAdapter(vendorReviewAdapter);
 
         // Handle submit button click
 
@@ -70,7 +59,6 @@ public class VendorReviewFragment extends Fragment {
 
     private List<VendorReview> fetchVendorReviews() {
         // This method should return a list of vendor reviews related to the current order
-        // Mocked example:
         List<VendorReview> reviews = new ArrayList<>();
         reviews.add(new VendorReview("1", "Vendor A", Arrays.asList("Product 1", "Product 2")));
         reviews.add(new VendorReview("2", "Vendor B", Arrays.asList("Product 3")));
@@ -115,18 +103,6 @@ public class VendorReviewFragment extends Fragment {
             } else {
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             }
-//            try {
-//                JSONArray jsonArray = new JSONArray(result);
-//
-//                System.out.println(jsonArray.toString());
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-////                       Double rating = jsonObject.getDouble("rating");
-////                       String review = jsonObject.getString("comment");
-////                       String vendorId = jsonObject.getString("vendorId");
-//                    VendorReview reviews = new VendorReview("vendorId", "dscds", Arrays.asList("sdcsdc", "dcd", "dsc"));
-//                    reviewList.add(reviews);
-//                }
 
                 List<VendorReview> reviews = new ArrayList<>();
                 reviews.add(new VendorReview("1", "Vendor A", Arrays.asList("Product 1", "Product 2")));
@@ -138,13 +114,6 @@ public class VendorReviewFragment extends Fragment {
                 } else {
                     vendorReviewAdapter.notifyDataSetChanged();
                 }
-
-
-
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//                Toast.makeText(getContext(), "Error parsing reviews", Toast.LENGTH_SHORT).show();
-//            }
         }
     }
 }

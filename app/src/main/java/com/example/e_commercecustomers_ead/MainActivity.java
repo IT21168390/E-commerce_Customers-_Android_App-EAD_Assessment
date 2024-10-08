@@ -3,8 +3,6 @@ package com.example.e_commercecustomers_ead;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,11 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment orderHistoryFragment;
     private Fragment vendorReviewFragment;
     private Fragment profileViewFragment;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_products);
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,19 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        // Check if savedInstanceState is null to avoid overlapping fragments on orientation change
-        /*if (savedInstanceState == null) {
-            // Add the ProductsFragment to the container
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Create an instance of ProductsFragment
-            ProductsFragment productsFragment = new ProductsFragment();
-
-            // Replace the container with the fragment
-            fragmentTransaction.replace(R.id.fragment_container, productsFragment);
-            fragmentTransaction.commit();
-        }*/
     }
 
     // Method to load the selected fragment into the container

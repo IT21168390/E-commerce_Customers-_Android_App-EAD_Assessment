@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-// import android.widget.ImageView; // Not used if you set orderIcon as a common icon
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,13 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.api_models.Address;
 import com.example.e_commercecustomers_ead.api_models.OrderModel;
-import com.example.e_commercecustomers_ead.models.Order;
 import com.example.e_commercecustomers_ead.services.OrderManager;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -62,8 +57,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.orderCost.setText(String.format("Cost: $%.2f", order.getTotalAmount()));
         holder.orderStatus.setText("Status: " + order.getOrderStatus());
 
-        /*SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(order.getPlacedAt());*/
         holder.orderDate.setText("Date: " + order.getPlacedAt());
 
         // Set order icon/image if needed
@@ -89,7 +82,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
 
         // Enable or disable Rate button based on order status and rating
-        if (order.getOrderStatus().equalsIgnoreCase("Delivered") /*&& !order.isRated()*/) {
+        if (order.getOrderStatus().equalsIgnoreCase("Delivered")) {
             holder.rateButton.setEnabled(true);
         } else {
             holder.rateButton.setEnabled(false);
@@ -120,10 +113,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 .setTitle("Cancel Order")
                 .setMessage("Are you sure you want to cancel this order?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    // Cancel order logic
-                    /*OrderManager.getInstance().removeOrder(order);
-                    orders.remove(order);
-                    notifyDataSetChanged(); // Refresh the list*/
 
                     // Call the cancelOrder method in OrderManager
                     OrderManager.getInstance().cancelOrder(order.getId(), new OrderManager.OnCancelOrderListener() {

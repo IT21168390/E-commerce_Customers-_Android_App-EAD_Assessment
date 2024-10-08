@@ -1,18 +1,12 @@
 package com.example.e_commercecustomers_ead.services;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.api_models.Address;
 import com.example.e_commercecustomers_ead.api_models.OrderItem;
 import com.example.e_commercecustomers_ead.api_models.OrderModel;
-import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.api_models.VendorOrderStatus;
-import com.example.e_commercecustomers_ead.fragments.OrderHistoryFragment;
 import com.example.e_commercecustomers_ead.models.CartItem;
-import com.example.e_commercecustomers_ead.models.Order;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,13 +18,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class OrderManager {
     private static OrderManager instance;
@@ -38,9 +27,6 @@ public class OrderManager {
 
     private OrderManager() {
         orders = new ArrayList<>();
-        //fetchOrdersFromApi();
-        // For demonstration, let's add some dummy orders
-        //populateDummyOrders();
 
         new OrderManager.LoadOrdersTask().execute("");
     }
@@ -52,13 +38,7 @@ public class OrderManager {
         return instance;
     }
 
-    /*private void populateDummyOrders() {
-        orders.add(new Order(UUID.randomUUID().toString(), 1500.00, "Pending", new Date(), "Order details for pending order."));
-        orders.add(new Order(UUID.randomUUID().toString(), 2500.50, "Dispatched", new Date(), "Order details for dispatched order."));
-        orders.add(new Order(UUID.randomUUID().toString(), 2500.50, "Partially Delivered", new Date(), "Order details for partially delivered order."));
-        orders.add(new Order(UUID.randomUUID().toString(), 3500.75, "Delivered", new Date(), "Order details for delivered order."));
-        orders.add(new Order(UUID.randomUUID().toString(), 4500.25, "Cancelled", new Date(), "Order details for cancelled order."));
-    }*/
+
     private class LoadOrdersTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -89,27 +69,12 @@ public class OrderManager {
             if (result == null) {
                 return;
             }
-            System.out.println("*********************************************");
             try {
                 JSONArray resultsArray = new JSONArray(result);
                 orders.clear();
 
                 for (int i = 0; i < resultsArray.length(); i++) {
                     JSONObject orderJson = resultsArray.getJSONObject(i);
-                    /*OrderModel order = new OrderModel(
-                            orderJson.getString("id"),
-                            orderJson.getString("orderID"),
-                            orderJson.getString("customerId"),
-                            orderJson.getString("customerName"),
-                            orderJson.getString("orderStatus"),
-                            orderJson.getJSONArray("orderItems"),
-                            orderJson.getDouble("totalAmount"),
-                            orderJson.getString("note"),
-                            orderJson.getJSONObject("shippingAddress"),
-                            orderJson.getString("placedAt"),
-                            orderJson.getString("updayeddAt"),
-                            orderJson.getJSONArray("vendorStatus")
-                    );*/
                     // Parse order items
                     JSONArray orderItemsArray = orderJson.getJSONArray("orderItems");
                     List<OrderItem> orderItems = new ArrayList<>();
@@ -213,14 +178,6 @@ public class OrderManager {
                 connection.setRequestMethod("PATCH");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
-
-                // If your API requires a body, you can write it here
-                // For example:
-                // JSONObject jsonParam = new JSONObject();
-                // jsonParam.put("reason", "User requested cancellation");
-                // OutputStream os = connection.getOutputStream();
-                // os.write(jsonParam.toString().getBytes("UTF-8"));
-                // os.close();
 
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK ||
@@ -335,12 +292,6 @@ public class OrderManager {
 
 
 
-
-
-
-
-
-
     // Method to place an order
     public void placeOrder(String customerId, List<CartItem> cartItems, Address shippingAddress, OnPurchaseOrderListener listener) {
         new PlaceOrderTask(customerId, cartItems, shippingAddress, listener).execute();
@@ -412,7 +363,7 @@ public class OrderManager {
 
                     // Parse response to get orderId if needed
                     JSONObject responseJson = new JSONObject(response.toString());
-                    orderId = responseJson.optString("id", ""); // Adjust based on your API's response
+                    orderId = responseJson.optString("id", ""); // Adjust based on API's response
                     return true;
                 } else {
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
@@ -443,32 +394,6 @@ public class OrderManager {
     }
 
 
-
-
-
-
-    /*private void fetchOrdersFromApi() {
-        OrderApiService apiService = RetrofitClient.getRetrofitInstance().create(OrderApiService.class);
-        Call<List<Order>> call = apiService.getAllOrders();
-
-        call.enqueue(new Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    //orders.addAll(response.body());
-                    System.out.println("-----------------------------------------------------------"+response.body());
-                } else {
-                    Log.e("OrderManager", "Failed to fetch orders: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.e("OrderManager", "Error fetching orders", t);
-            }
-        });
-    }*/
-
     public List<OrderModel> getOrdersByStatus(String status) {
         List<OrderModel> filteredOrders = new ArrayList<>();
         for (OrderModel order : orders) {
@@ -486,9 +411,6 @@ public class OrderManager {
             } else if (order.getOrderStatus().equalsIgnoreCase(status)) {
                 filteredOrders.add(order);
             }
-            /*if (order.getOrderStatus().equalsIgnoreCase(status)) {
-                filteredOrders.add(order);
-            }*/
         }
         return filteredOrders;
     }
@@ -498,12 +420,11 @@ public class OrderManager {
     }
 
     public void rateOrder(OrderModel order) {
-        //order.setRated(true);
+
     }
 
     public void removeOrder(OrderModel order) {
         orders.remove(order);
     }
 
-    // Additional methods like updateOrderStatus can be added as needed
 }

@@ -1,7 +1,6 @@
 package com.example.e_commercecustomers_ead.api_models;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class OrderModel implements Serializable {

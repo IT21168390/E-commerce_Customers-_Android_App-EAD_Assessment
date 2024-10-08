@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.example.e_commercecustomers_ead.fragments.ProductDetailsFragment;
-import com.example.e_commercecustomers_ead.models.Product;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -42,8 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productCategory.setText(product.getCategory());
         holder.productRating.setRating((float) 4.0);
         holder.productPrice.setText("$" + product.getPrice());
-        //holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
-        //holder.productRating.setText(String.format("%.1f", product.getRating()));
         holder.productImage.setImageResource(product.getImageResource());
 
         // Handle View button click

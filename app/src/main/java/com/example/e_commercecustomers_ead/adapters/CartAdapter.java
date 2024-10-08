@@ -13,27 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
-import com.example.e_commercecustomers_ead.models.Product;
 import com.example.e_commercecustomers_ead.services.CartManager;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-//    private List<Product> cartItems;
-//    private OnItemRemovedListener onItemRemovedListener;
-//
-//    public interface OnItemRemovedListener {
-//        void onItemRemoved(int position);
-//    }
-//
-//    /*public CartAdapter(List<Product> cartItems) {
-//        this.cartItems = cartItems;
-//    }*/
-//    public CartAdapter(List<Product> cartItems, OnItemRemovedListener listener) {
-//        this.cartItems = cartItems;
-//        this.onItemRemovedListener = listener;
-//    }
     private List<ProductDataModel> cartItems;
     private Context context;
     private CartManager cartManager;
@@ -64,7 +49,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.productRating.setText("Rating: " + product.getRating());
         holder.cartProductQuantity.setText("Quantity: " + cartManager.getQuantity(product));
 
-        // Optionally, you can set the product image
+        // Optionally, set the product image
         holder.productImage.setImageResource(product.getImageResource());
 
         // Set delete button click listener
@@ -77,9 +62,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             notifyItemRangeChanged(position, cartItems.size());
             updateTotalCost();  // Update the total cost
         });
-        /*holder.deleteButton.setOnClickListener(v -> {
-            onItemRemovedListener.onItemRemoved(position);
-        });*/
     }
 
     @Override
@@ -89,7 +71,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     private void updateTotalCost() {
         double totalCost = cartManager.getTotalCost();
-        // Assuming you have a reference to your total cost TextView:
         ((Activity) context).runOnUiThread(() -> {
             TextView totalCostTextView = ((Activity) context).findViewById(R.id.totalCost);
             totalCostTextView.setText("Total: $" + String.format("%.2f", totalCost));

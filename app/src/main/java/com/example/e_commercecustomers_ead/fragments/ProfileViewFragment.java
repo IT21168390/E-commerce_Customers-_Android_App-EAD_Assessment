@@ -1,6 +1,5 @@
 package com.example.e_commercecustomers_ead.fragments;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,12 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.example.e_commercecustomers_ead.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -147,7 +144,7 @@ public class ProfileViewFragment extends Fragment {
             }else{
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             }
-//
+
             try{
                 JSONObject jsonObject = new JSONObject(result);
                 user = jsonObject;

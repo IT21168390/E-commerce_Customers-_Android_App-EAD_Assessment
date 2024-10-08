@@ -156,7 +156,15 @@ public class ProfileViewFragment extends Fragment {
                 tvRole.setText(user.getString("userType"));
                 tvEmailValue.setText(user.getString("email"));
                 tvAccountStatusValue.setText(user.getString("status"));
-                tvAddress.setText(user.getString("address"));
+                if (!user.isNull("address")) {
+                    JSONObject addressObject = user.getJSONObject("address");
+                    String street = addressObject.getString("street");
+                    String city = addressObject.getString("city");
+                    String zipCode = addressObject.getString("zip_code");
+                    String address = street + ", " + city + ", " + zipCode;
+                    System.out.println(address);
+                    tvAddress.setText(address);
+                }
                 // Set other fields as needed
             } catch (JSONException e) {
                 e.printStackTrace();

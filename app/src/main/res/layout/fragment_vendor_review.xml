@@ -37,22 +37,21 @@
         android:id="@+id/rvVendorReviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnSubmitReviews"
         android:layout_marginBottom="16dp"
         android:layout_below="@id/topSection"
         />
 
-    <!-- Button to submit reviews -->
-    <Button
-        android:id="@+id/btnSubmitReviews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit Reviews"
-        android:backgroundTint="@color/light_blue_600"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="50dp" />
+<!--    &lt;!&ndash; Button to submit reviews &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnSubmitReviews"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Submit Reviews"-->
+<!--        android:backgroundTint="@color/light_blue_600"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="50dp" />-->
 
 </RelativeLayout>

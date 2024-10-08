@@ -2,14 +2,19 @@ package com.example.e_commercecustomers_ead;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.e_commercecustomers_ead.fragments.CartFragment;
+import com.example.e_commercecustomers_ead.fragments.NotificationFragment;
 import com.example.e_commercecustomers_ead.fragments.OrderHistoryFragment;
 import com.example.e_commercecustomers_ead.fragments.ProductsFragment;
 import com.example.e_commercecustomers_ead.fragments.ProfileViewFragment;
@@ -27,15 +32,29 @@ public class MainActivity extends AppCompatActivity {
     private Fragment orderHistoryFragment;
     private Fragment vendorReviewFragment;
     private Fragment profileViewFragment;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_products);
-//    }
+
+    private TextView tvNotificationBadge;
+    private FrameLayout flNotificationIcon;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Set the activity's main layout (not the fragment layout)
+
+//       toolbar = findViewById(R.id.toolbar);
+//       setSupportActionBar(toolbar);
+//
+//       // Get references to the notification icon and badge
+//       flNotificationIcon = toolbar.findViewById(R.id.ivNotificationIcon);
+//       tvNotificationBadge = toolbar.findViewById(R.id.tvNotificationBadge);
+//
+//       // Set up click listener to navigate to NotificationFragment
+//       flNotificationIcon.setOnClickListener(v -> navigateToNotificationFragment());
+//
+//       // Fetch unread notification count from the database or shared preferences
+//       int unreadNotificationCount = getUnreadNotificationCount();
+//       updateNotificationBadge(unreadNotificationCount);
 
         // Initialize fragments
         productsFragment = new ProductsFragment();
@@ -82,19 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        // Check if savedInstanceState is null to avoid overlapping fragments on orientation change
-        /*if (savedInstanceState == null) {
-            // Add the ProductsFragment to the container
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Create an instance of ProductsFragment
-            ProductsFragment productsFragment = new ProductsFragment();
-
-            // Replace the container with the fragment
-            fragmentTransaction.replace(R.id.fragment_container, productsFragment);
-            fragmentTransaction.commit();
-        }*/
     }
 
     // Method to load the selected fragment into the container
@@ -105,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    // Optional: Handle back button press to navigate between fragments
+    // Handle back button press to navigate between fragments
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0){
@@ -114,5 +120,31 @@ public class MainActivity extends AppCompatActivity {
         else {
             super.onBackPressed();
         }
+    }
+
+    private void updateNotificationBadge(int count) {
+        if (count > 0) {
+            tvNotificationBadge.setVisibility(View.VISIBLE);
+            tvNotificationBadge.setText(String.valueOf(count));
+        } else {
+            tvNotificationBadge.setVisibility(View.GONE);
+        }
+    }
+
+    private int getUnreadNotificationCount() {
+        // Mock function, replace with actual logic to fetch unread notification count
+        return 5; // Example unread count
+    }
+
+    private void navigateToNotificationFragment() {
+        // Clear unread notification count when navigating
+        updateNotificationBadge(0);
+
+        // Navigate to the NotificationFragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new NotificationFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

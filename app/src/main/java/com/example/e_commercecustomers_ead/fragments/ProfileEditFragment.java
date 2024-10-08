@@ -59,7 +59,7 @@ public class ProfileEditFragment extends Fragment {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View viewm) {
                 // Call method to update profile data
                 new updateProfileData().execute("https://192.168.8.124:45455/api/user/6702343c691f8023a70cbf0d");
             }
@@ -127,9 +127,12 @@ public class ProfileEditFragment extends Fragment {
                 user = jsonObject;
                 System.out.println(user);
                 name_input.setText(user.getString("name"));
-                street_input.setText(user.getString("userType"));
-                city_input.setText(user.getString("email"));
-                zip_input.setText(user.getString("status"));
+                if (!user.isNull("address")) {
+                    JSONObject address = user.getJSONObject("address");
+                    street_input.setText(address.getString("street"));
+                    city_input.setText(address.getString("city"));
+                    zip_input.setText(address.getString("zipCode"));
+                }
                 // Set other fields as needed
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -143,7 +146,6 @@ public class ProfileEditFragment extends Fragment {
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder result = new StringBuilder();
-
             try {
                 URL url = new URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -152,10 +154,13 @@ public class ProfileEditFragment extends Fragment {
                 connection.setDoOutput(true);
 
                 JSONObject user = new JSONObject();
+                JSONObject address = new JSONObject();
+
+                address.put("street", street_input.getText().toString());
+                address.put("city", city_input.getText().toString());
+                address.put("zipCode", zip_input.getText().toString());
                 user.put("name", name_input.getText().toString());
-                user.put("email", street_input.getText().toString());
-                user.put("password", city_input.getText().toString());
-                user.put("status", zip_input.getText().toString());
+                user.put("address", address);
 
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(user.toString());

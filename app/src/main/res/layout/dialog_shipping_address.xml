@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout for the Update Shipping Address Dialog.
+    This layout includes input fields for Street, City, and Zip Code.
+    Utilizes Material Design components for a modern look and feel.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Dialog Title -->
+<!--        <TextView-->
+<!--            android:id="@+id/dialogTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Update Shipping Address"-->
+<!--            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:paddingBottom="16dp" />-->
+
+        <!-- Street Address Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/streetTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Street Address"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/purple_500"
+            app:hintTextColor="@color/black"
+            app:helperTextEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/streetEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:singleLine="true"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Space between fields -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- City Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cityTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/purple_500"
+            app:hintTextColor="@color/black"
+            app:helperTextEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cityEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Space between fields -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Zip Code Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/zipCodeTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Zip Code"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/purple_500"
+            app:hintTextColor="@color/black"
+            app:helperTextEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/zipCodeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Optional: Add more fields if necessary -->
+
+    </LinearLayout>
+</ScrollView>

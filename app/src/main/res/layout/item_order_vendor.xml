@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+        <!-- Vendor Status -->
+        <!-- dynamically populated using a RecyclerView or dynamically added views -->
+        <TextView
+            android:id="@+id/orderVendorNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vendor A :"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+        <TextView
+            android:id="@+id/orderVendorStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textSize="16sp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginBottom="4dp"/>
+
+    </RelativeLayout>

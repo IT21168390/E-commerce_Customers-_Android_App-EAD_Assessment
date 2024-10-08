@@ -5,6 +5,15 @@ public class Address {
     public String City;
     public String ZipCode;
 
+    public Address() {
+    }
+
+    public Address(String street, String city, String zipCode) {
+        Street = street;
+        City = city;
+        ZipCode = zipCode;
+    }
+
     public String getStreet() {
         return Street;
     }

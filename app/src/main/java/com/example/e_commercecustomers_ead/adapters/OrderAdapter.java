@@ -1,6 +1,7 @@
 package com.example.e_commercecustomers_ead.adapters;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 // Import the Order model
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api_models.Address;
 import com.example.e_commercecustomers_ead.api_models.OrderModel;
 import com.example.e_commercecustomers_ead.models.Order;
 import com.example.e_commercecustomers_ead.services.OrderManager;
@@ -118,9 +121,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 .setMessage("Are you sure you want to cancel this order?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     // Cancel order logic
-                    OrderManager.getInstance().removeOrder(order);
+                    /*OrderManager.getInstance().removeOrder(order);
                     orders.remove(order);
-                    notifyDataSetChanged(); // Refresh the list
+                    notifyDataSetChanged(); // Refresh the list*/
+
+                    // Call the cancelOrder method in OrderManager
+                    OrderManager.getInstance().cancelOrder(order.getId(), new OrderManager.OnCancelOrderListener() {
+                        @Override
+                        public void onCancelSuccess(String orderId) {
+                            // Remove the order from the local list
+                            int position = orders.indexOf(order);
+                            if (position != -1) {
+                                orders.remove(position);
+                                notifyItemRemoved(position);
+                                Toast.makeText(context, "Order cancelled successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelFailure(String orderId, String errorMessage) {
+                            // Handle the failure
+                            Toast.makeText(context, "Failed to cancel order: " + errorMessage, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 })
                 .setNegativeButton("No", null)
                 .show();
@@ -136,15 +159,63 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         EditText cityInput = dialogView.findViewById(R.id.cityEditText);
         EditText zipCodeInput = dialogView.findViewById(R.id.zipCodeEditText);
 
+        // Pre-fill existing address if available
+        if (order.getShippingAddress() != null) {
+            streetInput.setText(order.getShippingAddress().getStreet());
+            cityInput.setText(order.getShippingAddress().getCity());
+            zipCodeInput.setText(order.getShippingAddress().getZipCode());
+        }
+
         builder.setView(dialogView)
                 .setTitle("Update Address")
                 .setPositiveButton("Submit", (dialog, which) -> {
+                    // Optionally, show a progress dialog
+                    ProgressDialog progressDialog = new ProgressDialog(context);
+                    progressDialog.setMessage("Updating address...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
                     // Handle the address update logic
-                    String street = streetInput.getText().toString();
-                    String city = cityInput.getText().toString();
-                    String zipCode = zipCodeInput.getText().toString();
+                    String street = streetInput.getText().toString().trim();
+                    String city = cityInput.getText().toString().trim();
+                    String zipCode = zipCodeInput.getText().toString().trim();
                     // Update the order with new address information
-                    // Implement your update logic here
+
+                    // Validate inputs
+                    if (street.isEmpty() || city.isEmpty() || zipCode.isEmpty()) {
+                        Toast.makeText(context, "All fields are required.", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        return;
+                    }
+
+                    // Create a new Address object
+                    Address updatedAddress = new Address();
+                    updatedAddress.setStreet(street);
+                    updatedAddress.setCity(city);
+                    updatedAddress.setZipCode(zipCode);
+
+                    // Call the updateOrderAddress method in OrderManager
+                    OrderManager.getInstance().updateOrderAddress(order.getId(), updatedAddress, new OrderManager.OnUpdateOrderListener() {
+                        @Override
+                        public void onUpdateSuccess(String orderId) {
+                            // Update the local order object
+                            int position = orders.indexOf(order);
+                            if (position != -1) {
+                                OrderModel currentOrder = orders.get(position);
+                                currentOrder.setShippingAddress(updatedAddress);
+                                notifyItemChanged(position);
+                                Toast.makeText(context, "Address updated successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onUpdateFailure(String orderId, String errorMessage) {
+                            // Handle the failure
+                            Toast.makeText(context, "Failed to update address: " + errorMessage, Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                        }
+                    });
                 })
                 .setNegativeButton("Cancel", null)
                 .show();

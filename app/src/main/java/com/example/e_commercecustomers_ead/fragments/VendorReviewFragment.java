@@ -45,26 +45,15 @@ public class VendorReviewFragment extends Fragment {
         // Setup RecyclerView with adapter
         rvVendorReviews.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Handle submit button click
-
         backButton.setOnClickListener(v -> {
             // Navigate back to the previous fragment
             requireActivity().getSupportFragmentManager().popBackStack();
         });
 
-//         new VendorReviewFragment.LoadVendorReviewsTask().execute("https://192.168.8.124:45455/api/VendorRating/670405849849fe66fcfdedc5");
+        new VendorReviewFragment.LoadVendorReviewsTask().execute("https://192.168.8.124:45455/api/VendorRating/670405849849fe66fcfdedc5");
 
         return root;
     }
-
-    private List<VendorReview> fetchVendorReviews() {
-        // This method should return a list of vendor reviews related to the current order
-        List<VendorReview> reviews = new ArrayList<>();
-        reviews.add(new VendorReview("1", "Vendor A", Arrays.asList("Product 1", "Product 2")));
-        reviews.add(new VendorReview("2", "Vendor B", Arrays.asList("Product 3")));
-        return reviews;
-    }
-
 
     public class LoadVendorReviewsTask extends AsyncTask<String, Void, String> {
 
@@ -104,9 +93,18 @@ public class VendorReviewFragment extends Fragment {
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             }
 
-                List<VendorReview> reviews = new ArrayList<>();
-                reviews.add(new VendorReview("1", "Vendor A", Arrays.asList("Product 1", "Product 2")));
-                reviews.add(new VendorReview("2", "Vendor B", Arrays.asList("Product 3")));
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                System.out.println(jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    Double rating = jsonObject.getDouble("rating");
+                    String review = jsonObject.getString("comment");
+                    String vendorId = jsonObject.getString("vendorId");
+                    VendorReview reviews = new VendorReview(vendorId, rating, review);
+                    reviewList.add(reviews);
+                }
 
                 if (vendorReviewAdapter == null) {
                     vendorReviewAdapter = new VendorReviewAdapter(reviews);
@@ -114,6 +112,60 @@ public class VendorReviewFragment extends Fragment {
                 } else {
                     vendorReviewAdapter.notifyDataSetChanged();
                 }
+        }
+    }
+
+    public class postVendorReviewTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder result = new StringBuilder();
+            try {
+                URL url = new URL(urls[0]);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                    // Create a JSON array for the reviews
+                    JSONArray reviewsArray = new JSONArray();
+                    for (VendorReview review : reviewList) {
+                        JSONObject reviewJson = new JSONObject();
+                        reviewJson.put("rating", review.getStarRating());
+                        reviewJson.put("review", review.getReviewComment());
+                        reviewJson.put("vendorId", review.getVendorId());
+                        reviewsArray.put(reviewJson);
+                    }
+
+                    // Send the JSON array to the server
+                    OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream());
+                    writer.write(reviewsArray.toString());
+                    writer.flush();
+
+                    InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
+                    int data = reader.read();
+                    while (data != -1) {
+                        result.append((char) data);
+                        data = reader.read();
+                    }
+                    return result.toString();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result == null) {
+                Toast.makeText(getContext(), "Failed to submit reviews", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Reviews submitted successfully", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

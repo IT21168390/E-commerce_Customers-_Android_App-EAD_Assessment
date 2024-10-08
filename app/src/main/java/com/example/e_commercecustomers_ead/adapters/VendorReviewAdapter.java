@@ -113,6 +113,8 @@ public class VendorReviewAdapter extends RecyclerView.Adapter<VendorReviewAdapte
             // Edit/Save button listener
             btnEditSave.setOnClickListener(v -> {
                 if (vendorReview.isEditMode()) {
+                            
+                    new VendorReviewFragment.postVendorReviewTask().execute("https://192.168.8.124:45455/api/VendorRating/6702343c691f8023a70cbf0d");
                     // Save mode: Save comment and switch to view-only
                     vendorReview.setReviewComment(etVendorReviewComment.getText().toString());
                     vendorReview.setStarRating(rbVendorRating.getRating());

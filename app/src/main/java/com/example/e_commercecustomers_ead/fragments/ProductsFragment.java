@@ -172,6 +172,13 @@ public class ProductsFragment extends Fragment {
                             productJson.getString("createdAt"),
                             productJson.getString("createdAt")
                     );
+                    if(product.getCategory().equals("Electronic")){
+                        product.setImageResource(R.drawable.electronics_device);
+                    } else if(product.getCategory().equals("Furniture")){
+                        product.setImageResource(R.drawable.furniture_armchair);
+                    } else if(product.getCategory().equals("Stationery")){
+                        product.setImageResource(R.drawable.stationary_notebook);
+                    }
                     productList.add(product);
                 }
 

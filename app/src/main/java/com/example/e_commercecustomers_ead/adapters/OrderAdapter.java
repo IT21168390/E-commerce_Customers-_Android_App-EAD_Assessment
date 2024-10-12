@@ -60,7 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.orderDate.setText("Date: " + order.getPlacedAt());
 
         // Set order icon/image if needed
-        holder.orderIcon.setImageResource(R.drawable.baseline_sell_24); // Replace with actual image
+        holder.orderIcon.setImageResource(R.drawable.order_icon_manifest);//baseline_sell_24); // Replace with actual image
 
         // Show or hide buttons based on order status
         if (order.getOrderStatus().equalsIgnoreCase("Pending")) {

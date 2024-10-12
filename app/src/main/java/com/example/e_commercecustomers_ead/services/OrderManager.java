@@ -2,6 +2,7 @@ package com.example.e_commercecustomers_ead.services;
 
 import android.os.AsyncTask;
 
+import com.example.e_commercecustomers_ead.api.API;
 import com.example.e_commercecustomers_ead.api_models.Address;
 import com.example.e_commercecustomers_ead.api_models.OrderItem;
 import com.example.e_commercecustomers_ead.api_models.OrderModel;
@@ -46,7 +47,7 @@ public class OrderManager {
             StringBuilder result = new StringBuilder();
             try {
                 System.out.println("-----------------------"+urls[0]+"--------------------------");
-                URL url = new URL("https://192.168.86.91:45456/api/Orders");//URL(urls[0]);
+                URL url = new URL(API.API+"/api/Orders");//URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
@@ -171,7 +172,7 @@ public class OrderManager {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            String cancelUrl = "https://192.168.86.91:45456/api/Orders/request-cancel/" + orderId;
+            String cancelUrl = API.API+"/Orders/request-cancel/" + orderId;
             try {
                 URL url = new URL(cancelUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -234,7 +235,7 @@ public class OrderManager {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            String updateUrl = "https://192.168.86.91:45456/api/Orders/" + orderId;
+            String updateUrl = API.API+"/Orders/" + orderId;
             try {
                 URL url = new URL(updateUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -315,7 +316,7 @@ public class OrderManager {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            String placeOrderUrl = "https://192.168.86.91:45456/api/Orders";
+            String placeOrderUrl = API.API+"/Orders";
             try {
                 URL url = new URL(placeOrderUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

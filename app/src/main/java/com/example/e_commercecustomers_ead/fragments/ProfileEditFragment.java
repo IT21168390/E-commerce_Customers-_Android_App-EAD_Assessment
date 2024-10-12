@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.e_commercecustomers_ead.R;
+import com.example.e_commercecustomers_ead.api.API;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONException;
@@ -61,7 +62,7 @@ public class ProfileEditFragment extends Fragment {
             @Override
             public void onClick(View viewm) {
                 // Call method to update profile data
-                new updateProfileData().execute("https://192.168.8.124:45455/api/user/6702343c691f8023a70cbf0d");
+                new updateProfileData().execute(API.API+"/user/670a81855b5281740d5c6d70");
             }
         });
 
@@ -70,7 +71,7 @@ public class ProfileEditFragment extends Fragment {
             requireActivity().getSupportFragmentManager().popBackStack();
         });
 
-        new LoadProfileData().execute("https://192.168.8.124:45455/api/user/6702343c691f8023a70cbf0d");
+        new LoadProfileData().execute(API.API+"/user/670a81855b5281740d5c6d70");
 
         return view;
     }
@@ -82,7 +83,7 @@ public class ProfileEditFragment extends Fragment {
                 .setMessage("Are you sure you want to deactivate your account?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     // Call method to handle account deactivation
-                    new deactivateAccount().execute("https://192.168.8.124:45455/api/User/activeUser/6702343c691f8023a70cbf0d");
+                    new deactivateAccount().execute(API.API+"/User/activeUser/670a81855b5281740d5c6d70");
 
                 })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss())

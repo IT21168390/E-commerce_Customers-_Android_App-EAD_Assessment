@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.e_commercecustomers_ead.api.API;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.example.e_commercecustomers_ead.R;
@@ -93,7 +94,7 @@ public class ProfileViewFragment extends Fragment {
         });
 
 
-        new LoadProfileData().execute("https://169.254.222.71:45455/api/user/6702343c691f8023a70cbf0d");
+        new LoadProfileData().execute(API.API+"/user/670a81855b5281740d5c6d70");
 
         return view;
     }

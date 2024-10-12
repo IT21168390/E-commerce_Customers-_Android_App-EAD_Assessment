@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.NotificationAdapter;
+import com.example.e_commercecustomers_ead.api.API;
 import com.example.e_commercecustomers_ead.models.Notification;
 
 import org.json.JSONArray;
@@ -59,7 +60,7 @@ public class NotificationFragment extends Fragment {
             requireActivity().getSupportFragmentManager().popBackStack();
         });
 
-        new NotificationFragment.LoadNotificationData().execute("https://192.168.8.124:45455/api/Notification/user/66f2da668b3a0ec04d2011c6");
+        new NotificationFragment.LoadNotificationData().execute(API.API+"/Notification/user/66f2da668b3a0ec04d2011c6");
 
 
         return view;

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.VendorReviewAdapter;
+import com.example.e_commercecustomers_ead.api.API;
 import com.example.e_commercecustomers_ead.models.VendorReview;
 
 import java.io.BufferedReader;
@@ -52,7 +53,7 @@ public class VendorReviewFragment extends Fragment {
             requireActivity().getSupportFragmentManager().popBackStack();
         });
 
-//         new VendorReviewFragment.LoadVendorReviewsTask().execute("https://192.168.8.124:45455/api/VendorRating/670405849849fe66fcfdedc5");
+         new VendorReviewFragment.LoadVendorReviewsTask().execute(API.API+"/VendorRating/670405849849fe66fcfdedc5");
 
         return root;
     }

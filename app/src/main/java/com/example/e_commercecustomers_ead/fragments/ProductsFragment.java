@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commercecustomers_ead.R;
 import com.example.e_commercecustomers_ead.adapters.ProductAdapter;
+import com.example.e_commercecustomers_ead.api.API;
 import com.example.e_commercecustomers_ead.api_models.ProductDataModel;
 
 import org.json.JSONArray;
@@ -126,7 +127,7 @@ public class ProductsFragment extends Fragment {
             StringBuilder result = new StringBuilder();
             try {
                 System.out.println("*******************"+urls[0]+"**************************");
-                URL url = new URL("https://192.168.86.91:45456/api/product/GetAllProductList");//URL(urls[0]);
+                URL url = new URL(API.API+"/product/GetAllProductList");//URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 

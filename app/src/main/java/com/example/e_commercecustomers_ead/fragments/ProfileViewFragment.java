@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ import java.net.URL;
 public class ProfileViewFragment extends Fragment {
 
     private TextView tvName,tvRole, tvEmailValue, tvAccountStatusValue, tvAddress;
-    private ImageView profileIcon;
-    private Button btnEdit, btnReview, btnNotification,  btnLogOut;
+    private ImageView profileIcon, ivNotificationIcon, btnEdit;
+    private Button btnReview,  btnLogOut;
 
     private JSONObject user;
 
@@ -51,7 +52,7 @@ public class ProfileViewFragment extends Fragment {
         btnEdit = view.findViewById(R.id.btnEdit);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         btnReview = view.findViewById(R.id.btnReview);
-        btnNotification = view.findViewById(R.id.btnNotification);
+        ivNotificationIcon = view.findViewById(R.id.ivNotificationIcon);
 
         // Set up button click listeners
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class ProfileViewFragment extends Fragment {
             }
         });
 
-        btnNotification.setOnClickListener(new View.OnClickListener() {
+        ivNotificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -92,7 +93,7 @@ public class ProfileViewFragment extends Fragment {
         });
 
 
-        new LoadProfileData().execute("https://192.168.8.124:45455/api/user/6702343c691f8023a70cbf0d");
+        new LoadProfileData().execute("https://169.254.222.71:45455/api/user/6702343c691f8023a70cbf0d");
 
         return view;
     }

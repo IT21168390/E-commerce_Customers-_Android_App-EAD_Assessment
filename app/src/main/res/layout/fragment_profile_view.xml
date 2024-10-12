@@ -6,190 +6,304 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/white"
     tools:context=".fragments.ProfileViewFragment">
 
-    <!-- Profile Header -->
-    <RelativeLayout
+    <!-- Toolbar with notification icon -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:layout_marginBottom="32dp">
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <ImageView
-            android:id="@+id/profileIcon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/avatar" />
-
-        <TextView
-            android:id="@+id/tvName"
+        <FrameLayout
+            android:id="@+id/flNotificationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/black" />
+            android:layout_gravity="end"
+            android:paddingEnd="16dp">
+            <include layout="@layout/notification_badge" />
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvRole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvName"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="6dp"
-            android:text="Customer"
-            android:textColor="@color/gray_400"
-            android:textSize="14sp" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
-    <!-- Edit Button -->
-    <Button
-        android:id="@+id/btnEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/light_blue_600"
-        android:layout_gravity="end"
-        android:layout_marginBottom="16dp" />
-
-
-    <Button
-        android:id="@+id/btnReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Review"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/light_blue_600"
-        android:layout_gravity="end"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/btnNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/light_blue_600"
-        android:layout_gravity="end"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Profile Details -->
-    <LinearLayout
+    <!-- Scrollable content -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:showDividers="middle">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <!-- Email -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="16dp">
-            <ImageView
-                android:id="@+id/iconEmail"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_message"
-                android:layout_alignParentStart="true" />
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="16sp"
-                android:layout_toEndOf="@id/iconEmail"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black" />
-            <TextView
-                android:id="@+id/tvEmailValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Email"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </RelativeLayout>
+            android:orientation="vertical">
 
-        <!-- Phone Number -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="16dp">
-            <ImageView
-                android:id="@+id/iconAccountStatus"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_status"
-                android:layout_alignParentStart="true" />
-            <TextView
-                android:id="@+id/tvAccountStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Account Status"
-                android:textSize="16sp"
-                android:layout_toEndOf="@id/iconAccountStatus"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black" />
-            <TextView
-                android:id="@+id/tvAccountStatusValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Status"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </RelativeLayout>
+            <!-- Profile Header -->
 
-        <!-- Address -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="16dp">
-            <ImageView
-                android:id="@+id/iconAddress"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_location"
-                android:layout_alignParentStart="true" />
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="wrap_content"
+            <!-- Edit Button on the Right Side -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="16sp"
-                android:layout_toEndOf="@id/iconAddress"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black" />
-            <TextView
-                android:id="@+id/tvAddressValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="No. 123, Walivite,Malabe."
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </RelativeLayout>
+                android:layout_marginBottom="32dp"
+                android:padding="16dp">
 
-        <!-- Log Out Button -->
-        <Button
-            android:id="@+id/btnLogOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log out"
-            android:backgroundTint="@color/light_blue_600"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
-    </LinearLayout>
+                <!-- Profile Image -->
+                <ImageView
+                    android:id="@+id/profileIcon"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="16dp" />
+
+                <!-- Name -->
+
+                <!-- Role -->
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@id/profileIcon"
+                    app:layout_constraintTop_toTopOf="@id/profileIcon" />
+
+                <TextView
+                    android:id="@+id/tvRole"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer"
+                    android:textColor="@color/gray_400"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/profileIcon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@id/profileIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvName"
+                    app:layout_constraintVertical_bias="0.254" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/editSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/profile_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="31dp" />
+
+                <ImageView
+                    android:id="@+id/btnEdit"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_arrow_right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="3dp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Review"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/light_blue_600"
+                android:layout_gravity="end"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Profile Details -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"
+                android:padding="16dp"
+                android:showDividers="middle">
+
+                <!-- Email -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp">
+                    <ImageView
+                        android:id="@+id/iconEmail"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_message"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textSize="16sp"
+                        android:layout_toEndOf="@id/iconEmail"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tvEmailValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <!-- Phone Number -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp">
+                    <ImageView
+                        android:id="@+id/iconAccountStatus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_status"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/tvAccountStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account Status"
+                        android:textSize="16sp"
+                        android:layout_toEndOf="@id/iconAccountStatus"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tvAccountStatusValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Status"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <!-- Address -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp">
+                    <ImageView
+                        android:id="@+id/iconAddress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_location"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textSize="16sp"
+                        android:layout_toEndOf="@id/iconAddress"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tvAddressValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="No. 123, Walivite, Malabe."
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp">
+                    <ImageView
+                        android:id="@+id/iconZipCode"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/home_icon"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/tvZipCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Postal Code"
+                        android:textSize="16sp"
+                        android:layout_toEndOf="@id/iconZipCode"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tvZipCodeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="010002"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp">
+                    <ImageView
+                        android:id="@+id/iconCity"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_location"
+                        android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:textSize="16sp"
+                        android:layout_toEndOf="@id/iconCity"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/tvCityValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Malabe"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Log Out Button -->
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Log out"
+        android:backgroundTint="@color/light_blue_600"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="55dp"
+        android:layout_gravity="bottom" />
 </LinearLayout>

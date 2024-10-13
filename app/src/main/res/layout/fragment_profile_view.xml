@@ -92,7 +92,36 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <RelativeLayout
+                android:id="@+id/editSection2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+            <TextView
+                android:id="@+id/notification_count1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notification Count : "
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="31dp" />
 
+            <TextView
+                android:id="@+id/notification_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="31dp" />
+
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/editSection"
                 android:layout_width="match_parent"

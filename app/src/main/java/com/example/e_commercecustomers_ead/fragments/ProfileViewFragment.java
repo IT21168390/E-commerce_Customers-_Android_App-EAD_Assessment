@@ -31,7 +31,7 @@ import java.net.URL;
 
 public class ProfileViewFragment extends Fragment {
 
-    private TextView tvName,tvRole, tvEmailValue, tvAccountStatusValue, tvAddress;
+    private TextView tvName,tvRole, tvEmailValue, tvAccountStatusValue, tvAddress, notification_count;
     private ImageView profileIcon, ivNotificationIcon, btnEdit;
     private Button btnReview,  btnLogOut;
 
@@ -54,6 +54,7 @@ public class ProfileViewFragment extends Fragment {
         btnLogOut = view.findViewById(R.id.btnLogOut);
         btnReview = view.findViewById(R.id.btnReview);
         ivNotificationIcon = view.findViewById(R.id.ivNotificationIcon);
+        notification_count = view.findViewById(R.id.notification_count);
 
         // Set up button click listeners
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +170,41 @@ public class ProfileViewFragment extends Fragment {
                 e.printStackTrace();
                 Toast.makeText(getContext(), "Error parsing users", Toast.LENGTH_SHORT).show();
             }
+        }
+        private void fetchUnreadNotificationsCount(String userId) {
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    int count = 0;
+                    try {
+                        URL url = new URL(API.API + "/Notification/user/" + userId + "/unread-count");
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("GET");
+                        conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                        conn.setRequestProperty("Accept","application/json");
+
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        String line = reader.readLine();
+                        count = Integer.parseInt(line);
+
+                        reader.close();
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return count;
+                }
+
+                @Override
+                protected void onPostExecute(Integer count) {
+                    super.onPostExecute(count);
+                    // TODO: Update your TextView with the count
+                    // If the count is 0, set the visibility of the TextView to GONE
+                    // Otherwise, set the visibility to VISIBLE and set the text to the count
+                    notification_count.setText(String.valueOf(count));
+
+                }
+            }.execute();
         }
     }
 

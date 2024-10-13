@@ -108,11 +108,13 @@ public class NotificationFragment extends Fragment {
                 System.out.println(jsonArray);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String id = jsonObject.getString("_id");
                     String Msg = jsonObject.getString("message");
+                    Boolean isRead = jsonObject.getBoolean("is_read");
                     String dateString = jsonObject.getString("createdAt");
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     Date date = sdf.parse(dateString);
-                    Notification notification = new Notification(Msg, date);
+                    Notification notification = new Notification(id, Msg, date, isRead);
                     notificationsList.add(notification);
                 }
 
